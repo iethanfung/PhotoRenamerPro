@@ -1,0 +1,56 @@
+import json
+import os
+from src.utils.constants import CONFIG_DIR, DEFAULT_SETTINGS, DEFAULT_CP_MAP, DEFAULT_ISSUE_MAP
+from loguru import logger
+
+
+class ConfigManager:
+    SETTINGS_FILE = os.path.join(CONFIG_DIR, "settings.json")
+    CP_MAP_FILE = os.path.join(CONFIG_DIR, "cp_map.json")
+    ISSUE_MAP_FILE = os.path.join(CONFIG_DIR, "issue_map.json")
+
+    @classmethod
+    def ensure_defaults(cls):
+        if not os.path.exists(CONFIG_DIR):
+            os.makedirs(CONFIG_DIR)
+
+        cls._create_if_missing(cls.SETTINGS_FILE, DEFAULT_SETTINGS)
+        cls._create_if_missing(cls.CP_MAP_FILE, DEFAULT_CP_MAP)
+        cls._create_if_missing(cls.ISSUE_MAP_FILE, DEFAULT_ISSUE_MAP)
+
+    @staticmethod
+    def _create_if_missing(path, content):
+        if not os.path.exists(path):
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(content, f, indent=2, ensure_ascii=False)
+            logger.info(f"Created default config: {path}")
+
+    @classmethod
+    def load_settings(cls):
+        with open(cls.SETTINGS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    @classmethod
+    def save_settings(cls, data):
+        with open(cls.SETTINGS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+    @classmethod
+    def load_cp_map(cls):
+        with open(cls.CP_MAP_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    @classmethod
+    def save_cp_map(cls, data):
+        with open(cls.CP_MAP_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+    @classmethod
+    def load_issue_map(cls):
+        with open(cls.ISSUE_MAP_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    @classmethod
+    def save_issue_map(cls, data):
+        with open(cls.ISSUE_MAP_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)

@@ -1,0 +1,43 @@
+{
+  "last_session": {
+    "excel_path": "C:/Users/admin/Desktop/重构/机台信息.xlsx",
+    "regular_output_dir": "C:/Users/admin/Desktop/重构/put",
+    "issue_output_dir": "C:/Users/admin/Desktop/重构/put"
+  },
+  "excel_header_map": {
+    "Build": "Build",
+    "Config": "Config",
+    "Rel_No": "No#",
+    "SN": "SN",
+    "Mode": "Mode",
+    "WF": "WF",
+    "Test": "Test"
+  },
+  "regular_photo": {
+    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_WF{WF}-{Test}_{CP}-{Orient}",
+    "template_folder": "{Test}/{Config}/{Mode}/{SN}",
+    "parsed_data_map": {
+      "CP": "CP",
+      "O": "Orient"
+    }
+  },
+  "issue_photo": {
+    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_{WF}-{Test}_{CP}-{Issue}",
+    "template_folder": "{Test}/{Config}/{Mode}/{Rel_No}",
+    "parsed_data_map": {
+      "CP": "CP",
+      "Issue": "Issue"
+    }
+  },
+  "illegal_chars": [
+    "/",
+    "\\",
+    ":",
+    "*",
+    "?",
+    "\"",
+    "<",
+    ">",
+    "|"
+  ]
+}
