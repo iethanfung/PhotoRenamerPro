@@ -2,7 +2,7 @@ import os
 import shutil
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
-    QLabel, QHeaderView, QSizePolicy, QFileDialog, QMessageBox
+    QLabel, QHeaderView, QSizePolicy, QFileDialog, QMessageBox, QCheckBox, QDialog, QDialogButtonBox
 )
 from PySide6.QtCore import Qt, Slot
 from src.ui.components.preview_table import PreviewTable
@@ -128,9 +128,25 @@ class MainWindow(QMainWindow):
     def apply_styles(self):
         qss_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'styles',
                                 'sonoma.qss')
+
+        # 基础样式
+        base_style = ""
         if os.path.exists(qss_path):
             with open(qss_path, 'r', encoding='utf-8') as f:
-                self.setStyleSheet(f.read())
+                base_style = f.read()
+
+        # 🔥🔥🔥 修复点 1：追加 ToolTip 强制样式 🔥🔥🔥
+        # 防止系统主题导致看不清
+        tooltip_style = """
+            QToolTip {
+                color: #000000;
+                background-color: #ffffe0;
+                border: 1px solid #888;
+                padding: 4px;
+                border-radius: 4px;
+            }
+        """
+        self.setStyleSheet(base_style + tooltip_style)
 
     def open_settings(self):
         dlg = SettingsDialog(self)
@@ -155,6 +171,10 @@ class MainWindow(QMainWindow):
         ok, msg = self.excel_engine.load_excel(path, self.settings['excel_header_map'])
         if ok:
             self.btn_excel.setText(f"📄 Excel: {os.path.basename(path)}")
+
+            # 🔥🔥🔥 修复点 2：补上 Excel 按钮的悬停提示 🔥🔥🔥
+            self.btn_excel.setToolTip(path)
+
             self.status_bar.update_status(0, 0, "Excel Loaded")
         else:
             QMessageBox.critical(self, "Error", msg)
@@ -199,15 +219,28 @@ class MainWindow(QMainWindow):
         if not self.excel_engine.df is not None:
             QMessageBox.warning(self, "Warning", "Please load Excel first!")
             return
+
         results = []
+        skipped_count = 0
+
         for f in file_paths:
+            # 检查是否已存在
+            if self.model.has_file(f):
+                skipped_count += 1
+                continue
+
             res = self.parser_engine.parse_filename(f)
             target_path, target_name = self.file_processor.generate_target_path(res)
             res['target_filename'] = target_name
             res['target_full_path'] = target_path
             results.append(res)
+
         self.model.add_rows(results)
-        self.status_bar.update_status(self.model.rowCount(), 0, f"Loaded {len(results)} files")
+
+        msg = f"Loaded {len(results)} files"
+        if skipped_count > 0:
+            msg += f" (Skipped {skipped_count} duplicates)"
+        self.status_bar.update_status(self.model.rowCount(), 0, msg)
 
     @Slot(object, object)
     def on_data_changed(self, top_left, bottom_right):
@@ -265,63 +298,165 @@ class MainWindow(QMainWindow):
 
             self.model.update_row(row, item['parse_result'])
 
-    # ... (execute_rename 等保持不变)
+        # 🔥🔥🔥 修复点 2: 冲突处理逻辑 🔥🔥🔥
 
     def execute_rename(self):
-        tasks = []
-        green_tasks = []
+        # 1. 预扫描：获取所有绿色行的索引
+        green_indices = []
         other_count = 0
 
-        for item in self.model.data_list:
-            color = item['parse_result'].get('status_color')
-            if color == COLOR_GREEN:
-                green_tasks.append(item)
+        for i, item in enumerate(self.model.data_list):
+            if item['parse_result'].get('status_color') == COLOR_GREEN:
+                green_indices.append(i)
             else:
                 other_count += 1
 
-        if not green_tasks and other_count == 0:
+        # 2. 检查逻辑
+        if not green_indices and other_count == 0:
             QMessageBox.information(self, "Info", "List is empty.")
             return
 
         if other_count > 0:
-            msg = (
-                f"⚠️ {other_count} items that are NOT Ready (Yellow/Red/Orange).\n"
-                f"Only the {len(green_tasks)} Green (Ready) items will be processed.\n\n"
-                "Do you want to continue?"
-            )
-            reply = QMessageBox.warning(self, "Warning", msg, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-            if reply == QMessageBox.No:
-                return
+            reply = QMessageBox.warning(self, "Warning",
+                                        f"⚠️ {other_count} items are NOT Ready.\nOnly {len(green_indices)} Green items will be processed.\n\nContinue?",
+                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No: return
 
-        if not green_tasks:
+        if not green_indices:
             QMessageBox.information(self, "Info", "No Green (Ready) items to process.")
             return
 
         reg_out = self.settings['last_session'].get('regular_output_dir')
         issue_out = self.settings['last_session'].get('issue_output_dir')
-
         if not reg_out and not issue_out:
             QMessageBox.warning(self, "Warning", "Please select output directories first!")
             return
 
+        # 3. 开始处理
         success_count = 0
         errors = []
+        collision_policy = 0
 
-        for task in green_tasks:
+        # 🔥🔥🔥 记录需要删除的行号 🔥🔥🔥
+        indices_to_remove = []
+
+        for i in green_indices:
+            task = self.model.data_list[i]
             src = task['original_path']
             dst = task.get('target_full_path')
+
             if not dst: continue
+
             try:
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
-                shutil.copy2(src, dst)
-                success_count += 1
+
+                # 冲突检测逻辑
+                target_exists = os.path.exists(dst)
+                should_copy = True
+                final_dst = dst
+
+                if target_exists:
+                    action = collision_policy
+                    if collision_policy == 0:
+                        dialog = ConflictDialog(os.path.basename(src), dst, self)
+                        if dialog.exec():
+                            action = dialog.result_action
+                            if dialog.apply_to_all:
+                                collision_policy = action
+                        else:
+                            should_copy = False  # Cancelled
+
+                    if action == 2:  # Skip
+                        should_copy = False
+                    elif action == 3:  # Keep Both
+                        base, ext = os.path.splitext(dst)
+                        counter = 1
+                        while os.path.exists(final_dst):
+                            final_dst = f"{base}_{counter}{ext}"
+                            counter += 1
+
+                # 执行复制
+                if should_copy:
+                    shutil.copy2(src, final_dst)
+                    success_count += 1
+                    # 🔥🔥🔥 复制成功，标记该行待删除 🔥🔥🔥
+                    indices_to_remove.append(i)
+
             except Exception as e:
                 errors.append(f"{os.path.basename(src)}: {str(e)}")
 
+        # 4. 🔥🔥🔥 从表格中移除已处理的行 🔥🔥🔥
+        if indices_to_remove:
+            self.model.remove_rows_by_indices(indices_to_remove)
+
+        # 5. 结果提示
         msg = f"Successfully processed {success_count} files."
-        if other_count > 0:
-            msg += f"\n({other_count} items were skipped)"
+
+        # 如果全部处理完了，提示更简洁
+        if self.model.rowCount() == 0:
+            msg += "\nAll tasks completed! List cleared."
+        elif other_count > 0:
+            msg += f"\n({other_count} items were skipped/failed)"
+
         if errors:
             msg += f"\n\n{len(errors)} Errors occurred."
             print("Errors:", errors)
+
         QMessageBox.information(self, "Done", msg)
+
+
+# ... (上面是 MainWindow 类的所有代码) ...
+
+# 🔥🔥🔥 请把这段代码放到文件的最末尾 (不要有缩进) 🔥🔥🔥
+
+class ConflictDialog(QDialog):
+    def __init__(self, filename, target_path, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("File Exists - Conflict Resolution")
+        self.resize(500, 220)
+        self.result_action = 2  # 默认 Skip
+        self.apply_to_all = False
+
+        layout = QVBoxLayout(self)
+
+        # 提示信息
+        info_label = QLabel(
+            f"<h3>Target file already exists</h3>"
+            f"<p><b>File:</b> {filename}</p>"
+            f"<p style='color:#666'><b>Target:</b> {target_path}</p>"
+            f"<p>What do you want to do?</p>"
+        )
+        info_label.setWordWrap(True)
+        layout.addWidget(info_label)
+
+        # "应用到所有" 复选框
+        self.chk_all = QCheckBox("Do this for all remaining conflicts")
+        layout.addWidget(self.chk_all)
+
+        layout.addSpacing(10)
+
+        # 按钮组
+        btn_layout = QHBoxLayout()
+
+        btn_overwrite = QPushButton("Overwrite (覆盖)")
+        btn_skip = QPushButton("Skip (跳过)")
+        btn_keep = QPushButton("Keep Both (自动重命名)")
+
+        # 设置默认建议
+        btn_keep.setDefault(True)
+
+        # 绑定点击事件：1=Overwrite, 2=Skip, 3=KeepBoth
+        btn_overwrite.clicked.connect(lambda: self.done_action(1))
+        btn_skip.clicked.connect(lambda: self.done_action(2))
+        btn_keep.clicked.connect(lambda: self.done_action(3))
+
+        btn_layout.addWidget(btn_overwrite)
+        btn_layout.addWidget(btn_skip)
+        btn_layout.addWidget(btn_keep)
+
+        layout.addLayout(btn_layout)
+
+    def done_action(self, action_code):
+        self.result_action = action_code
+        self.apply_to_all = self.chk_all.isChecked()
+        self.accept()

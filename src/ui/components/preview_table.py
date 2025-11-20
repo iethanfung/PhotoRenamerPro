@@ -11,14 +11,12 @@ class PreviewTable(QTableView):
         self.pop = ImagePop(self)
         self.last_row = -1
 
-        # 允许选中多行
         self.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
         self.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
         self.verticalHeader().setVisible(False)
 
-    # 新增：监听键盘事件实现删除
     def keyPressEvent(self, event):
         if event.key() in [Qt.Key_Delete, Qt.Key_Backspace]:
             self.delete_selected_rows()
@@ -27,11 +25,8 @@ class PreviewTable(QTableView):
 
     def delete_selected_rows(self):
         selection = self.selectionModel().selectedRows()
-        if not selection:
-            return
-
+        if not selection: return
         rows_to_delete = [index.row() for index in selection]
-        # 调用 Model 的删除方法
         if self.model():
             self.model().remove_rows_by_indices(rows_to_delete)
 
@@ -39,23 +34,27 @@ class PreviewTable(QTableView):
         index = self.indexAt(event.pos())
         if index.isValid():
             row = index.row()
-            if index.column() == 1:  # 原文件名列
+
+            # 🔥🔥🔥 修复点：只在“原文件名”列显示自定义弹窗 🔥🔥🔥
+            # 注意：这里的列索引 1 对应 COL_NAME
+            if index.column() == 1:
                 if row != self.last_row:
                     model = self.model()
-                    # 增加防御性判断
                     if hasattr(model, 'get_file_path'):
                         file_path = model.get_file_path(row)
                         if file_path:
                             pix = ImageLoader.load_thumbnail(file_path)
-                            if pix:
-                                self.pop.set_image(pix)
-                                global_pos = self.mapToGlobal(event.pos())
-                                self.pop.move(global_pos + QPoint(20, 20))
-                                self.pop.show()
-                            else:
-                                self.pop.hide()
+                            # 🔥 调用新方法，传入图片和路径 🔥
+                            self.pop.set_content(pix, file_path)
+
+                            global_pos = self.mapToGlobal(event.pos())
+                            self.pop.move(global_pos + QPoint(20, 20))
+                            self.pop.show()
+                        else:
+                            self.pop.hide()
                     self.last_row = row
             else:
+                # 其他列隐藏图片弹窗（系统 Tooltip 会自动接管）
                 self.pop.hide()
                 self.last_row = -1
         else:
