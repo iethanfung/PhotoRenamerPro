@@ -1,57 +1,3450 @@
 {
-  "1mG": {
-    "25Drop": [
-      "25",
-      "25c",
-      "25cyc",
-      "25cycles",
-      "25drop",
-      "t25"
+  "Repetitive Drop (5 orientations)": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
     ],
-    "50Drop": [
-      "50",
-      "50c",
-      "50cyc",
-      "50cycles",
-      "50drop",
-      "t50"
+    "1000": [
+      "t1000",
+      "T1000",
+      "1000c",
+      "1000cyc",
+      "1000cycle",
+      "1000cycles",
+      "1k"
     ],
-    "75Drop": [
-      "75",
-      "75c",
-      "75cyc",
-      "75cycles",
-      "75drop",
-      "t75"
+    "2000": [
+      "t2000",
+      "T2000",
+      "2000c",
+      "2000cyc",
+      "2000cycle",
+      "2000cycles",
+      "2k"
     ],
-    "100Drop": [
-      "100",
-      "100c",
-      "100cyc",
-      "100cycles",
-      "100drop",
-      "t100"
+    "3000": [
+      "t3000",
+      "T3000",
+      "3000c",
+      "3000cyc",
+      "3000cycle",
+      "3000cycles",
+      "3k"
     ],
-    "": [
-      "20Cycles",
-      "70Cycles"
+    "4000": [
+      "t4000",
+      "T4000",
+      "4000c",
+      "4000cyc",
+      "4000cycle",
+      "4000cycles",
+      "4k"
+    ],
+    "5000": [
+      "t5000",
+      "T5000",
+      "5000c",
+      "5000cyc",
+      "5000cycle",
+      "5000cycles",
+      "5k"
+    ],
+    "6000": [
+      "t6000",
+      "T6000",
+      "6000c",
+      "6000cyc",
+      "6000cycle",
+      "6000cycles",
+      "6k"
+    ],
+    "7000": [
+      "t7000",
+      "T7000",
+      "7000c",
+      "7000cyc",
+      "7000cycle",
+      "7000cycles",
+      "7k"
+    ],
+    "8000": [
+      "t8000",
+      "T8000",
+      "8000c",
+      "8000cyc",
+      "8000cycle",
+      "8000cycles",
+      "8k"
+    ],
+    "9000": [
+      "t9000",
+      "T9000",
+      "9000c",
+      "9000cyc",
+      "9000cycle",
+      "9000cycles",
+      "9k"
+    ],
+    "10000": [
+      "t10000",
+      "T10000",
+      "10000c",
+      "10000cyc",
+      "10000cycle",
+      "10000cycles",
+      "10k"
+    ],
+    "11000": [
+      "t11000",
+      "T11000",
+      "11000c",
+      "11000cyc",
+      "11000cycle",
+      "11000cycles",
+      "11k"
+    ],
+    "12000": [
+      "t12000",
+      "T12000",
+      "12000c",
+      "12000cyc",
+      "12000cycle",
+      "12000cycles",
+      "12k"
+    ],
+    "13000": [
+      "t13000",
+      "T13000",
+      "13000c",
+      "13000cyc",
+      "13000cycle",
+      "13000cycles",
+      "13k"
+    ],
+    "14000": [
+      "t14000",
+      "T14000",
+      "14000c",
+      "14000cyc",
+      "14000cycle",
+      "14000cycles",
+      "14k"
+    ],
+    "15000": [
+      "t15000",
+      "T15000",
+      "15000c",
+      "15000cyc",
+      "15000cycle",
+      "15000cycles",
+      "15k"
+    ],
+    "16000": [
+      "t16000",
+      "T16000",
+      "16000c",
+      "16000cyc",
+      "16000cycle",
+      "16000cycles",
+      "16k"
+    ],
+    "17000": [
+      "t17000",
+      "T17000",
+      "17000c",
+      "17000cyc",
+      "17000cycle",
+      "17000cycles",
+      "17k"
+    ],
+    "18000": [
+      "t18000",
+      "T18000",
+      "18000c",
+      "18000cyc",
+      "18000cycle",
+      "18000cycles",
+      "18k"
+    ],
+    "19000": [
+      "t19000",
+      "T19000",
+      "19000c",
+      "19000cyc",
+      "19000cycle",
+      "19000cycles",
+      "19k"
+    ],
+    "20000": [
+      "t20000",
+      "T20000",
+      "20000c",
+      "20000cyc",
+      "20000cycle",
+      "20000cycles",
+      "20k"
+    ],
+    "21000": [
+      "t21000",
+      "T21000",
+      "21000c",
+      "21000cyc",
+      "21000cycle",
+      "21000cycles",
+      "21k"
+    ]
+  },
+  "Rock Tumble": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "Light media 45mins": [
+      "45mins light",
+      "light 45",
+      "light media",
+      "tLight media 45mins",
+      "TLight media 45mins",
+      "Light_media_45mins",
+      "Light-media-45mins"
+    ],
+    "Heavy media 15mins": [
+      "15mins heavy",
+      "heavy 15",
+      "heavy media",
+      "tHeavy media 15mins",
+      "THeavy media 15mins",
+      "Heavy_media_15mins",
+      "Heavy-media-15mins"
+    ]
+  },
+  "Ball Impact (Variation #1) unconstrained": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "5cm-location1": [
+      "t5cm-location1",
+      "T5cm-location1",
+      "5cm-l1",
+      "5cm-loc1",
+      "t5cm-l1",
+      "5cm_location1",
+      "5cm location1"
+    ],
+    "5cm-location2": [
+      "t5cm-location2",
+      "T5cm-location2",
+      "5cm-l2",
+      "5cm-loc2",
+      "t5cm-l2",
+      "5cm_location2",
+      "5cm location2"
+    ],
+    "5cm-location3": [
+      "t5cm-location3",
+      "T5cm-location3",
+      "5cm-l3",
+      "5cm-loc3",
+      "t5cm-l3",
+      "5cm_location3",
+      "5cm location3"
+    ],
+    "5cm-location4": [
+      "t5cm-location4",
+      "T5cm-location4",
+      "5cm-l4",
+      "5cm-loc4",
+      "t5cm-l4",
+      "5cm_location4",
+      "5cm location4"
+    ],
+    "5cm-location5": [
+      "t5cm-location5",
+      "T5cm-location5",
+      "5cm-l5",
+      "5cm-loc5",
+      "t5cm-l5",
+      "5cm_location5",
+      "5cm location5"
+    ],
+    "5cm-location6": [
+      "t5cm-location6",
+      "T5cm-location6",
+      "5cm-l6",
+      "5cm-loc6",
+      "t5cm-l6",
+      "5cm_location6",
+      "5cm location6"
+    ],
+    "10cm-location1": [
+      "t10cm-location1",
+      "T10cm-location1",
+      "10cm-l1",
+      "10cm-loc1",
+      "t10cm-l1",
+      "10cm_location1",
+      "10cm location1"
+    ],
+    "10cm-location2": [
+      "t10cm-location2",
+      "T10cm-location2",
+      "10cm-l2",
+      "10cm-loc2",
+      "t10cm-l2",
+      "10cm_location2",
+      "10cm location2"
+    ],
+    "10cm-location3": [
+      "t10cm-location3",
+      "T10cm-location3",
+      "10cm-l3",
+      "10cm-loc3",
+      "t10cm-l3",
+      "10cm_location3",
+      "10cm location3"
+    ],
+    "10cm-location4": [
+      "t10cm-location4",
+      "T10cm-location4",
+      "10cm-l4",
+      "10cm-loc4",
+      "t10cm-l4",
+      "10cm_location4",
+      "10cm location4"
+    ],
+    "10cm-location5": [
+      "t10cm-location5",
+      "T10cm-location5",
+      "10cm-l5",
+      "10cm-loc5",
+      "t10cm-l5",
+      "10cm_location5",
+      "10cm location5"
+    ],
+    "10cm-location6": [
+      "t10cm-location6",
+      "T10cm-location6",
+      "10cm-l6",
+      "10cm-loc6",
+      "t10cm-l6",
+      "10cm_location6",
+      "10cm location6"
+    ],
+    "15cm-location1": [
+      "t15cm-location1",
+      "T15cm-location1",
+      "15cm-l1",
+      "15cm-loc1",
+      "t15cm-l1",
+      "15cm_location1",
+      "15cm location1"
+    ],
+    "15cm-location2": [
+      "t15cm-location2",
+      "T15cm-location2",
+      "15cm-l2",
+      "15cm-loc2",
+      "t15cm-l2",
+      "15cm_location2",
+      "15cm location2"
+    ],
+    "15cm-location3": [
+      "t15cm-location3",
+      "T15cm-location3",
+      "15cm-l3",
+      "15cm-loc3",
+      "t15cm-l3",
+      "15cm_location3",
+      "15cm location3"
+    ],
+    "15cm-location4": [
+      "t15cm-location4",
+      "T15cm-location4",
+      "15cm-l4",
+      "15cm-loc4",
+      "t15cm-l4",
+      "15cm_location4",
+      "15cm location4"
+    ],
+    "15cm-location5": [
+      "t15cm-location5",
+      "T15cm-location5",
+      "15cm-l5",
+      "15cm-loc5",
+      "t15cm-l5",
+      "15cm_location5",
+      "15cm location5"
+    ],
+    "15cm-location6": [
+      "t15cm-location6",
+      "T15cm-location6",
+      "15cm-l6",
+      "15cm-loc6",
+      "t15cm-l6",
+      "15cm_location6",
+      "15cm location6"
+    ],
+    "20cm-location1": [
+      "t20cm-location1",
+      "T20cm-location1",
+      "20cm-l1",
+      "20cm-loc1",
+      "t20cm-l1",
+      "20cm_location1",
+      "20cm location1"
+    ],
+    "20cm-location2": [
+      "t20cm-location2",
+      "T20cm-location2",
+      "20cm-l2",
+      "20cm-loc2",
+      "t20cm-l2",
+      "20cm_location2",
+      "20cm location2"
+    ],
+    "20cm-location3": [
+      "t20cm-location3",
+      "T20cm-location3",
+      "20cm-l3",
+      "20cm-loc3",
+      "t20cm-l3",
+      "20cm_location3",
+      "20cm location3"
+    ],
+    "20cm-location4": [
+      "t20cm-location4",
+      "T20cm-location4",
+      "20cm-l4",
+      "20cm-loc4",
+      "t20cm-l4",
+      "20cm_location4",
+      "20cm location4"
+    ],
+    "20cm-location5": [
+      "t20cm-location5",
+      "T20cm-location5",
+      "20cm-l5",
+      "20cm-loc5",
+      "t20cm-l5",
+      "20cm_location5",
+      "20cm location5"
+    ],
+    "20cm-location6": [
+      "t20cm-location6",
+      "T20cm-location6",
+      "20cm-l6",
+      "20cm-loc6",
+      "t20cm-l6",
+      "20cm_location6",
+      "20cm location6"
+    ]
+  },
+  "Ball Impact (Variation #1) BG mated": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "5cm-location1": [
+      "t5cm-location1 BG mated",
+      "T5cm-location1 BG mated",
+      "5cm-l1 BG",
+      "5cm-loc1-mated",
+      "t5cm-l1-bg",
+      "5cm_location1_BG_mated",
+      "5cm location1 BG mated"
+    ],
+    "5cm-location2": [
+      "t5cm-location2 BG mated",
+      "T5cm-location2 BG mated",
+      "5cm-l2 BG",
+      "5cm-loc2-mated",
+      "t5cm-l2-bg",
+      "5cm_location2_BG_mated",
+      "5cm location2 BG mated"
+    ],
+    "5cm-location3": [
+      "t5cm-location3 BG mated",
+      "T5cm-location3 BG mated",
+      "5cm-l3 BG",
+      "5cm-loc3-mated",
+      "t5cm-l3-bg",
+      "5cm_location3_BG_mated",
+      "5cm location3 BG mated"
+    ],
+    "5cm-location4": [
+      "t5cm-location4 BG mated",
+      "T5cm-location4 BG mated",
+      "5cm-l4 BG",
+      "5cm-loc4-mated",
+      "t5cm-l4-bg",
+      "5cm_location4_BG_mated",
+      "5cm location4 BG mated"
+    ],
+    "5cm-location5": [
+      "t5cm-location5 BG mated",
+      "T5cm-location5 BG mated",
+      "5cm-l5 BG",
+      "5cm-loc5-mated",
+      "t5cm-l5-bg",
+      "5cm_location5_BG_mated",
+      "5cm location5 BG mated"
+    ],
+    "5cm-location6": [
+      "t5cm-location6 BG mated",
+      "T5cm-location6 BG mated",
+      "5cm-l6 BG",
+      "5cm-loc6-mated",
+      "t5cm-l6-bg",
+      "5cm_location6_BG_mated",
+      "5cm location6 BG mated"
+    ],
+    "10cm-location1": [
+      "t10cm-location1 BG mated",
+      "T10cm-location1 BG mated",
+      "10cm-l1 BG",
+      "10cm-loc1-mated",
+      "t10cm-l1-bg",
+      "10cm_location1_BG_mated",
+      "10cm location1 BG mated"
+    ],
+    "10cm-location2": [
+      "t10cm-location2 BG mated",
+      "T10cm-location2 BG mated",
+      "10cm-l2 BG",
+      "10cm-loc2-mated",
+      "t10cm-l2-bg",
+      "10cm_location2_BG_mated",
+      "10cm location2 BG mated"
+    ],
+    "10cm-location3": [
+      "t10cm-location3 BG mated",
+      "T10cm-location3 BG mated",
+      "10cm-l3 BG",
+      "10cm-loc3-mated",
+      "t10cm-l3-bg",
+      "10cm_location3_BG_mated",
+      "10cm location3 BG mated"
+    ],
+    "10cm-location4": [
+      "t10cm-location4 BG mated",
+      "T10cm-location4 BG mated",
+      "10cm-l4 BG",
+      "10cm-loc4-mated",
+      "t10cm-l4-bg",
+      "10cm_location4_BG_mated",
+      "10cm location4 BG mated"
+    ],
+    "10cm-location5": [
+      "t10cm-location5 BG mated",
+      "T10cm-location5 BG mated",
+      "10cm-l5 BG",
+      "10cm-loc5-mated",
+      "t10cm-l5-bg",
+      "10cm_location5_BG_mated",
+      "10cm location5 BG mated"
+    ],
+    "10cm-location6": [
+      "t10cm-location6 BG mated",
+      "T10cm-location6 BG mated",
+      "10cm-l6 BG",
+      "10cm-loc6-mated",
+      "t10cm-l6-bg",
+      "10cm_location6_BG_mated",
+      "10cm location6 BG mated"
+    ],
+    "15cm-location1": [
+      "t15cm-location1 BG mated",
+      "T15cm-location1 BG mated",
+      "15cm-l1 BG",
+      "15cm-loc1-mated",
+      "t15cm-l1-bg",
+      "15cm_location1_BG_mated",
+      "15cm location1 BG mated"
+    ],
+    "15cm-location2": [
+      "t15cm-location2 BG mated",
+      "T15cm-location2 BG mated",
+      "15cm-l2 BG",
+      "15cm-loc2-mated",
+      "t15cm-l2-bg",
+      "15cm_location2_BG_mated",
+      "15cm location2 BG mated"
+    ],
+    "15cm-location3": [
+      "t15cm-location3 BG mated",
+      "T15cm-location3 BG mated",
+      "15cm-l3 BG",
+      "15cm-loc3-mated",
+      "t15cm-l3-bg",
+      "15cm_location3_BG_mated",
+      "15cm location3 BG mated"
+    ],
+    "15cm-location4": [
+      "t15cm-location4 BG mated",
+      "T15cm-location4 BG mated",
+      "15cm-l4 BG",
+      "15cm-loc4-mated",
+      "t15cm-l4-bg",
+      "15cm_location4_BG_mated",
+      "15cm location4 BG mated"
+    ],
+    "15cm-location5": [
+      "t15cm-location5 BG mated",
+      "T15cm-location5 BG mated",
+      "15cm-l5 BG",
+      "15cm-loc5-mated",
+      "t15cm-l5-bg",
+      "15cm_location5_BG_mated",
+      "15cm location5 BG mated"
+    ],
+    "15cm-location6": [
+      "t15cm-location6 BG mated",
+      "T15cm-location6 BG mated",
+      "15cm-l6 BG",
+      "15cm-loc6-mated",
+      "t15cm-l6-bg",
+      "15cm_location6_BG_mated",
+      "15cm location6 BG mated"
+    ],
+    "20cm-location1": [
+      "t20cm-location1 BG mated",
+      "T20cm-location1 BG mated",
+      "20cm-l1 BG",
+      "20cm-loc1-mated",
+      "t20cm-l1-bg",
+      "20cm_location1_BG_mated",
+      "20cm location1 BG mated"
+    ],
+    "20cm-location2": [
+      "t20cm-location2 BG mated",
+      "T20cm-location2 BG mated",
+      "20cm-l2 BG",
+      "20cm-loc2-mated",
+      "t20cm-l2-bg",
+      "20cm_location2_BG_mated",
+      "20cm location2 BG mated"
+    ],
+    "20cm-location3": [
+      "t20cm-location3 BG mated",
+      "T20cm-location3 BG mated",
+      "20cm-l3 BG",
+      "20cm-loc3-mated",
+      "t20cm-l3-bg",
+      "20cm_location3_BG_mated",
+      "20cm location3 BG mated"
+    ],
+    "20cm-location4": [
+      "t20cm-location4 BG mated",
+      "T20cm-location4 BG mated",
+      "20cm-l4 BG",
+      "20cm-loc4-mated",
+      "t20cm-l4-bg",
+      "20cm_location4_BG_mated",
+      "20cm location4 BG mated"
+    ],
+    "20cm-location5": [
+      "t20cm-location5 BG mated",
+      "T20cm-location5 BG mated",
+      "20cm-l5 BG",
+      "20cm-loc5-mated",
+      "t20cm-l5-bg",
+      "20cm_location5_BG_mated",
+      "20cm location5 BG mated"
+    ],
+    "20cm-location6": [
+      "t20cm-location6 BG mated",
+      "T20cm-location6 BG mated",
+      "20cm-l6 BG",
+      "20cm-loc6-mated",
+      "t20cm-l6-bg",
+      "20cm_location6_BG_mated",
+      "20cm location6 BG mated"
     ]
   },
   "Sit Test": {
-    "25Cycles": [
-      "25",
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "1": [
+      "t1",
+      "T1",
+      "1c",
+      "1cyc",
+      "1cycle",
+      "1cycles"
+    ],
+    "2": [
+      "t2",
+      "T2",
+      "2c",
+      "2cyc",
+      "2cycle",
+      "2cycles"
+    ],
+    "3": [
+      "t3",
+      "T3",
+      "3c",
+      "3cyc",
+      "3cycle",
+      "3cycles"
+    ],
+    "4": [
+      "t4",
+      "T4",
+      "4c",
+      "4cyc",
+      "4cycle",
+      "4cycles"
+    ],
+    "5": [
+      "t5",
+      "T5",
+      "5c",
+      "5cyc",
+      "5cycle",
+      "5cycles"
+    ],
+    "6": [
+      "t6",
+      "T6",
+      "6c",
+      "6cyc",
+      "6cycle",
+      "6cycles"
+    ],
+    "7": [
+      "t7",
+      "T7",
+      "7c",
+      "7cyc",
+      "7cycle",
+      "7cycles"
+    ],
+    "8": [
+      "t8",
+      "T8",
+      "8c",
+      "8cyc",
+      "8cycle",
+      "8cycles"
+    ],
+    "9": [
+      "t9",
+      "T9",
+      "9c",
+      "9cyc",
+      "9cycle",
+      "9cycles"
+    ],
+    "10": [
+      "t10",
+      "T10",
+      "10c",
+      "10cyc",
+      "10cycle",
+      "10cycles"
+    ],
+    "25": [
+      "t25",
+      "T25",
       "25c",
       "25cyc",
-      "t25"
+      "25cycle",
+      "25cycles"
     ],
-    "50Cycles": [
-      "50",
+    "50": [
+      "t50",
+      "T50",
       "50c",
       "50cyc",
-      "t50"
+      "50cycle",
+      "50cycles"
     ],
-    "": [
-      "50Cycles"
+    "75": [
+      "t75",
+      "T75",
+      "75c",
+      "75cyc",
+      "75cycle",
+      "75cycles"
+    ],
+    "100": [
+      "t100",
+      "T100",
+      "100c",
+      "100cyc",
+      "100cycle",
+      "100cycles"
+    ],
+    "200": [
+      "t200",
+      "T200",
+      "200c",
+      "200cyc",
+      "200cycle",
+      "200cycles"
+    ],
+    "300": [
+      "t300",
+      "T300",
+      "300c",
+      "300cyc",
+      "300cycle",
+      "300cycles"
+    ],
+    "400": [
+      "t400",
+      "T400",
+      "400c",
+      "400cyc",
+      "400cycle",
+      "400cycles"
+    ],
+    "3500": [
+      "t3500",
+      "T3500",
+      "3500c",
+      "3500cyc",
+      "3500cycle",
+      "3500cycles",
+      "3.5k"
+    ],
+    "7000": [
+      "t7000",
+      "T7000",
+      "7000c",
+      "7000cyc",
+      "7000cycle",
+      "7000cycles",
+      "7k"
+    ]
+  },
+  "Pressure Squeeze - 20mm": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "L1-200cyc": [
+      "tL1-200cyc",
+      "TL1-200cyc",
+      "L1-200c",
+      "20mm L1",
+      "t20mm-l1",
+      "L1_200cyc",
+      "L1 200cyc"
+    ],
+    "L2-200cyc": [
+      "tL2-200cyc",
+      "TL2-200cyc",
+      "L2-200c",
+      "20mm L2",
+      "t20mm-l2",
+      "L2_200cyc",
+      "L2 200cyc"
+    ],
+    "L3-200cyc": [
+      "tL3-200cyc",
+      "TL3-200cyc",
+      "L3-200c",
+      "20mm L3",
+      "t20mm-l3",
+      "L3_200cyc",
+      "L3 200cyc"
+    ],
+    "L4-200cyc": [
+      "tL4-200cyc",
+      "TL4-200cyc",
+      "L4-200c",
+      "20mm L4",
+      "t20mm-l4",
+      "L4_200cyc",
+      "L4 200cyc"
+    ],
+    "L5-200cyc": [
+      "tL5-200cyc",
+      "TL5-200cyc",
+      "L5-200c",
+      "20mm L5",
+      "t20mm-l5",
+      "L5_200cyc",
+      "L5 200cyc"
+    ],
+    "L6-200cyc": [
+      "tL6-200cyc",
+      "TL6-200cyc",
+      "L6-200c",
+      "20mm L6",
+      "t20mm-l6",
+      "L6_200cyc",
+      "L6 200cyc"
+    ]
+  },
+  "Pressure Squeeze - 100mm": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "L2-4cyc": [
+      "tL2-4cyc",
+      "TL2-4cyc",
+      "L2-4c",
+      "100mm L2",
+      "t100mm-l2",
+      "L2_4cyc",
+      "L2 4cyc"
+    ],
+    "L3-4cyc": [
+      "tL3-4cyc",
+      "TL3-4cyc",
+      "L3-4c",
+      "100mm L3",
+      "t100mm-l3",
+      "L3_4cyc",
+      "L3 4cyc"
+    ],
+    "L5-4cyc": [
+      "tL5-4cyc",
+      "TL5-4cyc",
+      "L5-4c",
+      "100mm L5",
+      "t100mm-l5",
+      "L5_4cyc",
+      "L5 4cyc"
+    ]
+  },
+  "Pressure Squeeze - 5mm": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "L1-4cyc": [
+      "tL1-4cyc",
+      "TL1-4cyc",
+      "L1-4c",
+      "5mm L1",
+      "t5mm-l1",
+      "L1_4cyc",
+      "L1 4cyc"
+    ],
+    "L2-4cyc": [
+      "tL2-4cyc",
+      "TL2-4cyc",
+      "L2-4c",
+      "5mm L2",
+      "t5mm-l2",
+      "L2_4cyc",
+      "L2 4cyc"
+    ],
+    "L3-4cyc": [
+      "tL3-4cyc",
+      "TL3-4cyc",
+      "L3-4c",
+      "5mm L3",
+      "t5mm-l3",
+      "L3_4cyc",
+      "L3 4cyc"
+    ],
+    "L4-4cyc": [
+      "tL4-4cyc",
+      "TL4-4cyc",
+      "L4-4c",
+      "5mm L4",
+      "t5mm-l4",
+      "L4_4cyc",
+      "L4 4cyc"
+    ],
+    "L5-4cyc": [
+      "tL5-4cyc",
+      "TL5-4cyc",
+      "L5-4c",
+      "5mm L5",
+      "t5mm-l5",
+      "L5_4cyc",
+      "L5 4cyc"
+    ],
+    "L6-4cyc": [
+      "tL6-4cyc",
+      "TL6-4cyc",
+      "L6-4c",
+      "5mm L6",
+      "t5mm-l6",
+      "L6_4cyc",
+      "L6 4cyc"
+    ]
+  },
+  "Pressure Squeeze - 10mm": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "3kg-L1": [
+      "t3kg-L1",
+      "T3kg-L1",
+      "3kg L1",
+      "10mm 3kg l1",
+      "3kg_L1",
+      "3kgL1"
+    ],
+    "3kg-L2": [
+      "t3kg-L2",
+      "T3kg-L2",
+      "3kg L2",
+      "10mm 3kg l2",
+      "3kg_L2",
+      "3kgL2"
+    ],
+    "3kg-L3": [
+      "t3kg-L3",
+      "T3kg-L3",
+      "3kg L3",
+      "10mm 3kg l3",
+      "3kg_L3",
+      "3kgL3"
+    ],
+    "3kg-L4": [
+      "t3kg-L4",
+      "T3kg-L4",
+      "3kg L4",
+      "10mm 3kg l4",
+      "3kg_L4",
+      "3kgL4"
+    ],
+    "3kg-L5": [
+      "t3kg-L5",
+      "T3kg-L5",
+      "3kg L5",
+      "10mm 3kg l5",
+      "3kg_L5",
+      "3kgL5"
+    ],
+    "3kg-L6": [
+      "t3kg-L6",
+      "T3kg-L6",
+      "3kg L6",
+      "10mm 3kg l6",
+      "3kg_L6",
+      "3kgL6"
+    ],
+    "5kg-L1": [
+      "t5kg-L1",
+      "T5kg-L1",
+      "5kg L1",
+      "10mm 5kg l1",
+      "5kg_L1",
+      "5kgL1"
+    ],
+    "5kg-L2": [
+      "t5kg-L2",
+      "T5kg-L2",
+      "5kg L2",
+      "10mm 5kg l2",
+      "5kg_L2",
+      "5kgL2"
+    ],
+    "5kg-L3": [
+      "t5kg-L3",
+      "T5kg-L3",
+      "5kg L3",
+      "10mm 5kg l3",
+      "5kg_L3",
+      "5kgL3"
+    ],
+    "5kg-L4": [
+      "t5kg-L4",
+      "T5kg-L4",
+      "5kg L4",
+      "10mm 5kg l4",
+      "5kg_L4",
+      "5kgL4"
+    ],
+    "5kg-L5": [
+      "t5kg-L5",
+      "T5kg-L5",
+      "5kg L5",
+      "10mm 5kg l5",
+      "5kg_L5",
+      "5kgL5"
+    ],
+    "5kg-L6": [
+      "t5kg-L6",
+      "T5kg-L6",
+      "5kg L6",
+      "10mm 5kg l6",
+      "5kg_L6",
+      "5kgL6"
+    ],
+    "7kg-L1": [
+      "t7kg-L1",
+      "T7kg-L1",
+      "7kg L1",
+      "10mm 7kg l1",
+      "7kg_L1",
+      "7kgL1"
+    ],
+    "7kg-L2": [
+      "t7kg-L2",
+      "T7kg-L2",
+      "7kg L2",
+      "10mm 7kg l2",
+      "7kg_L2",
+      "7kgL2"
+    ],
+    "7kg-L3": [
+      "t7kg-L3",
+      "T7kg-L3",
+      "7kg L3",
+      "10mm 7kg l3",
+      "7kg_L3",
+      "7kgL3"
+    ],
+    "7kg-L4": [
+      "t7kg-L4",
+      "T7kg-L4",
+      "7kg L4",
+      "10mm 7kg l4",
+      "7kg_L4",
+      "7kgL4"
+    ],
+    "7kg-L5": [
+      "t7kg-L5",
+      "T7kg-L5",
+      "7kg L5",
+      "10mm 7kg l5",
+      "7kg_L5",
+      "7kgL5"
+    ],
+    "7kg-L6": [
+      "t7kg-L6",
+      "T7kg-L6",
+      "7kg L6",
+      "10mm 7kg l6",
+      "7kg_L6",
+      "7kgL6"
+    ],
+    "9kg-L1": [
+      "t9kg-L1",
+      "T9kg-L1",
+      "9kg L1",
+      "10mm 9kg l1",
+      "9kg_L1",
+      "9kgL1"
+    ],
+    "9kg-L2": [
+      "t9kg-L2",
+      "T9kg-L2",
+      "9kg L2",
+      "10mm 9kg l2",
+      "9kg_L2",
+      "9kgL2"
+    ],
+    "9kg-L3": [
+      "t9kg-L3",
+      "T9kg-L3",
+      "9kg L3",
+      "10mm 9kg l3",
+      "9kg_L3",
+      "9kgL3"
+    ],
+    "9kg-L4": [
+      "t9kg-L4",
+      "T9kg-L4",
+      "9kg L4",
+      "10mm 9kg l4",
+      "9kg_L4",
+      "9kgL4"
+    ],
+    "9kg-L5": [
+      "t9kg-L5",
+      "T9kg-L5",
+      "9kg L5",
+      "10mm 9kg l5",
+      "9kg_L5",
+      "9kgL5"
+    ],
+    "9kg-L6": [
+      "t9kg-L6",
+      "T9kg-L6",
+      "9kg L6",
+      "10mm 9kg l6",
+      "9kg_L6",
+      "9kgL6"
+    ],
+    "11kg-L1": [
+      "t11kg-L1",
+      "T11kg-L1",
+      "11kg L1",
+      "10mm 11kg l1",
+      "11kg_L1",
+      "11kgL1"
+    ],
+    "11kg-L2": [
+      "t11kg-L2",
+      "T11kg-L2",
+      "11kg L2",
+      "10mm 11kg l2",
+      "11kg_L2",
+      "11kgL2"
+    ],
+    "11kg-L3": [
+      "t11kg-L3",
+      "T11kg-L3",
+      "11kg L3",
+      "10mm 11kg l3",
+      "11kg_L3",
+      "11kgL3"
+    ],
+    "11kg-L4": [
+      "t11kg-L4",
+      "T11kg-L4",
+      "11kg L4",
+      "10mm 11kg l4",
+      "11kg_L4",
+      "11kgL4"
+    ],
+    "11kg-L5": [
+      "t11kg-L5",
+      "T11kg-L5",
+      "11kg L5",
+      "10mm 11kg l5",
+      "11kg_L5",
+      "11kgL5"
+    ],
+    "11kg-L6": [
+      "t11kg-L6",
+      "T11kg-L6",
+      "11kg L6",
+      "10mm 11kg l6",
+      "11kg_L6",
+      "11kgL6"
+    ],
+    "13kg-L1": [
+      "t13kg-L1",
+      "T13kg-L1",
+      "13kg L1",
+      "10mm 13kg l1",
+      "13kg_L1",
+      "13kgL1"
+    ],
+    "13kg-L2": [
+      "t13kg-L2",
+      "T13kg-L2",
+      "13kg L2",
+      "10mm 13kg l2",
+      "13kg_L2",
+      "13kgL2"
+    ],
+    "13kg-L3": [
+      "t13kg-L3",
+      "T13kg-L3",
+      "13kg L3",
+      "10mm 13kg l3",
+      "13kg_L3",
+      "13kgL3"
+    ],
+    "13kg-L4": [
+      "t13kg-L4",
+      "T13kg-L4",
+      "13kg L4",
+      "10mm 13kg l4",
+      "13kg_L4",
+      "13kgL4"
+    ],
+    "13kg-L5": [
+      "t13kg-L5",
+      "T13kg-L5",
+      "13kg L5",
+      "10mm 13kg l5",
+      "13kg_L5",
+      "13kgL5"
+    ],
+    "13kg-L6": [
+      "t13kg-L6",
+      "T13kg-L6",
+      "13kg L6",
+      "10mm 13kg l6",
+      "13kg_L6",
+      "13kgL6"
+    ],
+    "15kg-L1": [
+      "t15kg-L1",
+      "T15kg-L1",
+      "15kg L1",
+      "10mm 15kg l1",
+      "15kg_L1",
+      "15kgL1"
+    ],
+    "15kg-L2": [
+      "t15kg-L2",
+      "T15kg-L2",
+      "15kg L2",
+      "10mm 15kg l2",
+      "15kg_L2",
+      "15kgL2"
+    ],
+    "15kg-L3": [
+      "t15kg-L3",
+      "T15kg-L3",
+      "15kg L3",
+      "10mm 15kg l3",
+      "15kg_L3",
+      "15kgL3"
+    ],
+    "15kg-L4": [
+      "t15kg-L4",
+      "T15kg-L4",
+      "15kg L4",
+      "10mm 15kg l4",
+      "15kg_L4",
+      "15kgL4"
+    ],
+    "15kg-L5": [
+      "t15kg-L5",
+      "T15kg-L5",
+      "15kg L5",
+      "10mm 15kg l5",
+      "15kg_L5",
+      "15kgL5"
+    ],
+    "15kg-L6": [
+      "t15kg-L6",
+      "T15kg-L6",
+      "15kg L6",
+      "10mm 15kg l6",
+      "15kg_L6",
+      "15kgL6"
+    ],
+    "17kg-L1": [
+      "t17kg-L1",
+      "T17kg-L1",
+      "17kg L1",
+      "10mm 17kg l1",
+      "17kg_L1",
+      "17kgL1"
+    ],
+    "17kg-L2": [
+      "t17kg-L2",
+      "T17kg-L2",
+      "17kg L2",
+      "10mm 17kg l2",
+      "17kg_L2",
+      "17kgL2"
+    ],
+    "17kg-L3": [
+      "t17kg-L3",
+      "T17kg-L3",
+      "17kg L3",
+      "10mm 17kg l3",
+      "17kg_L3",
+      "17kgL3"
+    ],
+    "17kg-L4": [
+      "t17kg-L4",
+      "T17kg-L4",
+      "17kg L4",
+      "10mm 17kg l4",
+      "17kg_L4",
+      "17kgL4"
+    ],
+    "17kg-L5": [
+      "t17kg-L5",
+      "T17kg-L5",
+      "17kg L5",
+      "10mm 17kg l5",
+      "17kg_L5",
+      "17kgL5"
+    ],
+    "17kg-L6": [
+      "t17kg-L6",
+      "T17kg-L6",
+      "17kg L6",
+      "10mm 17kg l6",
+      "17kg_L6",
+      "17kgL6"
+    ],
+    "19kg-L1": [
+      "t19kg-L1",
+      "T19kg-L1",
+      "19kg L1",
+      "10mm 19kg l1",
+      "19kg_L1",
+      "19kgL1"
+    ],
+    "19kg-L2": [
+      "t19kg-L2",
+      "T19kg-L2",
+      "19kg L2",
+      "10mm 19kg l2",
+      "19kg_L2",
+      "19kgL2"
+    ],
+    "19kg-L3": [
+      "t19kg-L3",
+      "T19kg-L3",
+      "19kg L3",
+      "10mm 19kg l3",
+      "19kg_L3",
+      "19kgL3"
+    ],
+    "19kg-L4": [
+      "t19kg-L4",
+      "T19kg-L4",
+      "19kg L4",
+      "10mm 19kg l4",
+      "19kg_L4",
+      "19kgL4"
+    ],
+    "19kg-L5": [
+      "t19kg-L5",
+      "T19kg-L5",
+      "19kg L5",
+      "10mm 19kg l5",
+      "19kg_L5",
+      "19kgL5"
+    ],
+    "19kg-L6": [
+      "t19kg-L6",
+      "T19kg-L6",
+      "19kg L6",
+      "10mm 19kg l6",
+      "19kg_L6",
+      "19kgL6"
+    ],
+    "21kg-L1": [
+      "t21kg-L1",
+      "T21kg-L1",
+      "21kg L1",
+      "10mm 21kg l1",
+      "21kg_L1",
+      "21kgL1"
+    ],
+    "21kg-L2": [
+      "t21kg-L2",
+      "T21kg-L2",
+      "21kg L2",
+      "10mm 21kg l2",
+      "21kg_L2",
+      "21kgL2"
+    ],
+    "21kg-L3": [
+      "t21kg-L3",
+      "T21kg-L3",
+      "21kg L3",
+      "10mm 21kg l3",
+      "21kg_L3",
+      "21kgL3"
+    ],
+    "21kg-L4": [
+      "t21kg-L4",
+      "T21kg-L4",
+      "21kg L4",
+      "10mm 21kg l4",
+      "21kg_L4",
+      "21kgL4"
+    ],
+    "21kg-L5": [
+      "t21kg-L5",
+      "T21kg-L5",
+      "21kg L5",
+      "10mm 21kg l5",
+      "21kg_L5",
+      "21kgL5"
+    ],
+    "21kg-L6": [
+      "t21kg-L6",
+      "T21kg-L6",
+      "21kg L6",
+      "10mm 21kg l6",
+      "21kg_L6",
+      "21kgL6"
+    ]
+  },
+  "Tip tap writer": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "200000": [
+      "t200000",
+      "T200000",
+      "200000c",
+      "200000cyc",
+      "200000cycle",
+      "200000cycles",
+      "200k",
+      "t200k"
+    ],
+    "400000": [
+      "t400000",
+      "T400000",
+      "400000c",
+      "400000cyc",
+      "400000cycle",
+      "400000cycles",
+      "400k",
+      "t400k"
+    ],
+    "600000": [
+      "t600000",
+      "T600000",
+      "600000c",
+      "600000cyc",
+      "600000cycle",
+      "600000cycles",
+      "600k",
+      "t600k"
+    ],
+    "800000": [
+      "t800000",
+      "T800000",
+      "800000c",
+      "800000cyc",
+      "800000cycle",
+      "800000cycles",
+      "800k",
+      "t800k"
+    ],
+    "1000000": [
+      "t1000000",
+      "T1000000",
+      "1000000c",
+      "1000000cyc",
+      "1000000cycle",
+      "1000000cycles",
+      "1m",
+      "1000k",
+      "t1m"
+    ],
+    "1200000": [
+      "t1200000",
+      "T1200000",
+      "1200000c",
+      "1200000cyc",
+      "1200000cycle",
+      "1200000cycles",
+      "1.2m",
+      "1200k",
+      "t1.2m"
+    ],
+    "1220143": [
+      "t1220143",
+      "T1220143",
+      "1220143c",
+      "1220143cyc",
+      "1220143cycle",
+      "1220143cycles",
+      "1.22m",
+      "1220k",
+      "t1.22m"
+    ]
+  },
+  "Tip tap artist": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "65000": [
+      "t65000",
+      "T65000",
+      "65000c",
+      "65000cyc",
+      "65000cycle",
+      "65000cycles",
+      "65k",
+      "t65k"
+    ],
+    "130000": [
+      "t130000",
+      "T130000",
+      "130000c",
+      "130000cyc",
+      "130000cycle",
+      "130000cycles",
+      "130k",
+      "t130k"
+    ],
+    "195000": [
+      "t195000",
+      "T195000",
+      "195000c",
+      "195000cyc",
+      "195000cycle",
+      "195000cycles",
+      "195k",
+      "t195k"
+    ],
+    "260000": [
+      "t260000",
+      "T260000",
+      "260000c",
+      "260000cyc",
+      "260000cycle",
+      "260000cycles",
+      "260k",
+      "t260k"
+    ],
+    "325000": [
+      "t325000",
+      "T325000",
+      "325000c",
+      "325000cyc",
+      "325000cycle",
+      "325000cycles",
+      "325k",
+      "t325k"
+    ],
+    "390000": [
+      "t390000",
+      "T390000",
+      "390000c",
+      "390000cyc",
+      "390000cycle",
+      "390000cycles",
+      "390k",
+      "t390k"
+    ],
+    "455000": [
+      "t455000",
+      "T455000",
+      "455000c",
+      "455000cyc",
+      "455000cycle",
+      "455000cycles",
+      "455k",
+      "t455k"
+    ],
+    "498537": [
+      "t498537",
+      "T498537",
+      "498537c",
+      "498537cyc",
+      "498537cycle",
+      "498537cycles",
+      "498k",
+      "t498k"
+    ]
+  },
+  "Tip Insertion": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "300": [
+      "t300",
+      "T300",
+      "300c",
+      "300cyc",
+      "300cycle",
+      "300cycles"
+    ],
+    "600": [
+      "t600",
+      "T600",
+      "600c",
+      "600cyc",
+      "600cycle",
+      "600cycles"
+    ],
+    "900": [
+      "t900",
+      "T900",
+      "900c",
+      "900cyc",
+      "900cycle",
+      "900cycles"
+    ],
+    "1200": [
+      "t1200",
+      "T1200",
+      "1200c",
+      "1200cyc",
+      "1200cycle",
+      "1200cycles"
+    ]
+  },
+  "Drumming Test": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "10000": [
+      "t10000",
+      "T10000",
+      "10000c",
+      "10000cyc",
+      "10000cycle",
+      "10000cycles",
+      "10k",
+      "t10k"
+    ],
+    "20000": [
+      "t20000",
+      "T20000",
+      "20000c",
+      "20000cyc",
+      "20000cycle",
+      "20000cycles",
+      "20k",
+      "t20k"
+    ],
+    "30000": [
+      "t30000",
+      "T30000",
+      "30000c",
+      "30000cyc",
+      "30000cycle",
+      "30000cycles",
+      "30k",
+      "t30k"
+    ],
+    "40000": [
+      "t40000",
+      "T40000",
+      "40000c",
+      "40000cyc",
+      "40000cycle",
+      "40000cycles",
+      "40k",
+      "t40k"
+    ],
+    "50000": [
+      "t50000",
+      "T50000",
+      "50000c",
+      "50000cyc",
+      "50000cycle",
+      "50000cycles",
+      "50k",
+      "t50k"
+    ],
+    "60000": [
+      "t60000",
+      "T60000",
+      "60000c",
+      "60000cyc",
+      "60000cycle",
+      "60000cycles",
+      "60k",
+      "t60k"
+    ],
+    "70000": [
+      "t70000",
+      "T70000",
+      "70000c",
+      "70000cyc",
+      "70000cycle",
+      "70000cycles",
+      "70k",
+      "t70k"
+    ],
+    "80000": [
+      "t80000",
+      "T80000",
+      "80000c",
+      "80000cyc",
+      "80000cycle",
+      "80000cycles",
+      "80k",
+      "t80k"
+    ],
+    "90000": [
+      "t90000",
+      "T90000",
+      "90000c",
+      "90000cyc",
+      "90000cycle",
+      "90000cycles",
+      "90k",
+      "t90k"
+    ],
+    "100000": [
+      "t100000",
+      "T100000",
+      "100000c",
+      "100000cyc",
+      "100000cycle",
+      "100000cycles",
+      "100k",
+      "t100k"
+    ],
+    "110000": [
+      "t110000",
+      "T110000",
+      "110000c",
+      "110000cyc",
+      "110000cycle",
+      "110000cycles",
+      "110k",
+      "t110k"
+    ],
+    "120000": [
+      "t120000",
+      "T120000",
+      "120000c",
+      "120000cyc",
+      "120000cycle",
+      "120000cycles",
+      "120k",
+      "t120k"
+    ]
+  },
+  "Pencil Attachment Cycling (PAC) - Manual": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "720": [
+      "t720",
+      "T720",
+      "720c",
+      "720cyc",
+      "720cycle",
+      "720cycles"
+    ],
+    "1440": [
+      "t1440",
+      "T1440",
+      "1440c",
+      "1440cyc",
+      "1440cycle",
+      "1440cycles"
+    ],
+    "2160": [
+      "t2160",
+      "T2160",
+      "2160c",
+      "2160cyc",
+      "2160cycle",
+      "2160cycles"
+    ],
+    "3600": [
+      "t3600",
+      "T3600",
+      "3600c",
+      "3600cyc",
+      "3600cycle",
+      "3600cycles"
+    ],
+    "7200": [
+      "t7200",
+      "T7200",
+      "7200c",
+      "7200cyc",
+      "7200cycle",
+      "7200cycles"
+    ],
+    "15120": [
+      "t15120",
+      "T15120",
+      "15120c",
+      "15120cyc",
+      "15120cycle",
+      "15120cycles"
+    ],
+    "22320": [
+      "t22320",
+      "T22320",
+      "22320c",
+      "22320cyc",
+      "22320cycle",
+      "22320cycles"
+    ],
+    "23040": [
+      "t23040",
+      "T23040",
+      "23040c",
+      "23040cyc",
+      "23040cycle",
+      "23040cycles"
+    ],
+    "23760": [
+      "t23760",
+      "T23760",
+      "23760c",
+      "23760cyc",
+      "23760cycle",
+      "23760cycles"
+    ],
+    "24480": [
+      "t24480",
+      "T24480",
+      "24480c",
+      "24480cyc",
+      "24480cycle",
+      "24480cycles"
+    ],
+    "25920": [
+      "t25920",
+      "T25920",
+      "25920c",
+      "25920cyc",
+      "25920cycle",
+      "25920cycles"
+    ],
+    "29520": [
+      "t29520",
+      "T29520",
+      "29520c",
+      "29520cyc",
+      "29520cycle",
+      "29520cycles"
+    ],
+    "37440": [
+      "t37440",
+      "T37440",
+      "37440c",
+      "37440cyc",
+      "37440cycle",
+      "37440cycles"
+    ],
+    "44640": [
+      "t44640",
+      "T44640",
+      "44640c",
+      "44640cyc",
+      "44640cycle",
+      "44640cycles"
+    ],
+    "45360": [
+      "t45360",
+      "T45360",
+      "45360c",
+      "45360cyc",
+      "45360cycle",
+      "45360cycles"
+    ],
+    "46080": [
+      "t46080",
+      "T46080",
+      "46080c",
+      "46080cyc",
+      "46080cycle",
+      "46080cycles"
+    ],
+    "46800": [
+      "t46800",
+      "T46800",
+      "46800c",
+      "46800cyc",
+      "46800cycle",
+      "46800cycles"
+    ],
+    "48240": [
+      "t48240",
+      "T48240",
+      "48240c",
+      "48240cyc",
+      "48240cycle",
+      "48240cycles"
+    ],
+    "51840": [
+      "t51840",
+      "T51840",
+      "51840c",
+      "51840cyc",
+      "51840cycle",
+      "51840cycles"
+    ],
+    "59760": [
+      "t59760",
+      "T59760",
+      "59760c",
+      "59760cyc",
+      "59760cycle",
+      "59760cycles"
+    ],
+    "66960": [
+      "t66960",
+      "T66960",
+      "66960c",
+      "66960cyc",
+      "66960cycle",
+      "66960cycles"
+    ]
+  },
+  "Pencil Attachment Cycling (PAC) - Automatic": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "720": [
+      "t720",
+      "T720",
+      "720c",
+      "720cyc",
+      "720cycle",
+      "720cycles",
+      "t720auto"
+    ],
+    "1440": [
+      "t1440",
+      "T1440",
+      "1440c",
+      "1440cyc",
+      "1440cycle",
+      "1440cycles",
+      "t1440auto"
+    ],
+    "2160": [
+      "t2160",
+      "T2160",
+      "2160c",
+      "2160cyc",
+      "2160cycle",
+      "2160cycles",
+      "t2160auto"
+    ],
+    "3600": [
+      "t3600",
+      "T3600",
+      "3600c",
+      "3600cyc",
+      "3600cycle",
+      "3600cycles",
+      "t3600auto"
+    ],
+    "7200": [
+      "t7200",
+      "T7200",
+      "7200c",
+      "7200cyc",
+      "7200cycle",
+      "7200cycles",
+      "t7200auto"
+    ],
+    "15120": [
+      "t15120",
+      "T15120",
+      "15120c",
+      "15120cyc",
+      "15120cycle",
+      "15120cycles",
+      "t15120auto"
+    ],
+    "22320": [
+      "t22320",
+      "T22320",
+      "22320c",
+      "22320cyc",
+      "22320cycle",
+      "22320cycles",
+      "t22320auto"
+    ],
+    "23040": [
+      "t23040",
+      "T23040",
+      "23040c",
+      "23040cyc",
+      "23040cycle",
+      "23040cycles",
+      "t23040auto"
+    ],
+    "23760": [
+      "t23760",
+      "T23760",
+      "23760c",
+      "23760cyc",
+      "23760cycle",
+      "23760cycles",
+      "t23760auto"
+    ],
+    "24480": [
+      "t24480",
+      "T24480",
+      "24480c",
+      "24480cyc",
+      "24480cycle",
+      "24480cycles",
+      "t24480auto"
+    ],
+    "25920": [
+      "t25920",
+      "T25920",
+      "25920c",
+      "25920cyc",
+      "25920cycle",
+      "25920cycles",
+      "t25920auto"
+    ],
+    "29520": [
+      "t29520",
+      "T29520",
+      "29520c",
+      "29520cyc",
+      "29520cycle",
+      "29520cycles",
+      "t29520auto"
+    ],
+    "37440": [
+      "t37440",
+      "T37440",
+      "37440c",
+      "37440cyc",
+      "37440cycle",
+      "37440cycles",
+      "t37440auto"
+    ],
+    "44640": [
+      "t44640",
+      "T44640",
+      "44640c",
+      "44640cyc",
+      "44640cycle",
+      "44640cycles",
+      "t44640auto"
+    ],
+    "45360": [
+      "t45360",
+      "T45360",
+      "45360c",
+      "45360cyc",
+      "45360cycle",
+      "45360cycles",
+      "t45360auto"
+    ],
+    "46080": [
+      "t46080",
+      "T46080",
+      "46080c",
+      "46080cyc",
+      "46080cycle",
+      "46080cycles",
+      "t46080auto"
+    ],
+    "46800": [
+      "t46800",
+      "T46800",
+      "46800c",
+      "46800cyc",
+      "46800cycle",
+      "46800cycles",
+      "t46800auto"
+    ],
+    "48240": [
+      "t48240",
+      "T48240",
+      "48240c",
+      "48240cyc",
+      "48240cycle",
+      "48240cycles",
+      "t48240auto"
+    ],
+    "51840": [
+      "t51840",
+      "T51840",
+      "51840c",
+      "51840cyc",
+      "51840cycle",
+      "51840cycles",
+      "t51840auto"
+    ],
+    "59760": [
+      "t59760",
+      "T59760",
+      "59760c",
+      "59760cyc",
+      "59760cycle",
+      "59760cycles",
+      "t59760auto"
+    ],
+    "66960": [
+      "t66960",
+      "T66960",
+      "66960c",
+      "66960cyc",
+      "66960cycle",
+      "66960cycles",
+      "t66960auto"
+    ]
+  },
+  "Pencil Attachment Cycling (PAC) - Angled Variation 1": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "720": [
+      "t720",
+      "T720",
+      "720c",
+      "720cyc",
+      "720cycle",
+      "720cycles",
+      "t720angle"
+    ],
+    "1440": [
+      "t1440",
+      "T1440",
+      "1440c",
+      "1440cyc",
+      "1440cycle",
+      "1440cycles",
+      "t1440angle"
+    ],
+    "2160": [
+      "t2160",
+      "T2160",
+      "2160c",
+      "2160cyc",
+      "2160cycle",
+      "2160cycles",
+      "t2160angle"
+    ],
+    "3600": [
+      "t3600",
+      "T3600",
+      "3600c",
+      "3600cyc",
+      "3600cycle",
+      "3600cycles",
+      "t3600angle"
+    ],
+    "7200": [
+      "t7200",
+      "T7200",
+      "7200c",
+      "7200cyc",
+      "7200cycle",
+      "7200cycles",
+      "t7200angle"
+    ],
+    "15120": [
+      "t15120",
+      "T15120",
+      "15120c",
+      "15120cyc",
+      "15120cycle",
+      "15120cycles",
+      "t15120angle"
+    ],
+    "22320": [
+      "t22320",
+      "T22320",
+      "22320c",
+      "22320cyc",
+      "22320cycle",
+      "22320cycles",
+      "t22320angle"
+    ],
+    "23040": [
+      "t23040",
+      "T23040",
+      "23040c",
+      "23040cyc",
+      "23040cycle",
+      "23040cycles",
+      "t23040angle"
+    ],
+    "23760": [
+      "t23760",
+      "T23760",
+      "23760c",
+      "23760cyc",
+      "23760cycle",
+      "23760cycles",
+      "t23760angle"
+    ],
+    "24480": [
+      "t24480",
+      "T24480",
+      "24480c",
+      "24480cyc",
+      "24480cycle",
+      "24480cycles",
+      "t24480angle"
+    ],
+    "25920": [
+      "t25920",
+      "T25920",
+      "25920c",
+      "25920cyc",
+      "25920cycle",
+      "25920cycles",
+      "t25920angle"
+    ],
+    "29520": [
+      "t29520",
+      "T29520",
+      "29520c",
+      "29520cyc",
+      "29520cycle",
+      "29520cycles",
+      "t29520angle"
+    ],
+    "37440": [
+      "t37440",
+      "T37440",
+      "37440c",
+      "37440cyc",
+      "37440cycle",
+      "37440cycles",
+      "t37440angle"
+    ],
+    "44640": [
+      "t44640",
+      "T44640",
+      "44640c",
+      "44640cyc",
+      "44640cycle",
+      "44640cycles",
+      "t44640angle"
+    ],
+    "45360": [
+      "t45360",
+      "T45360",
+      "45360c",
+      "45360cyc",
+      "45360cycle",
+      "45360cycles",
+      "t45360angle"
+    ],
+    "46080": [
+      "t46080",
+      "T46080",
+      "46080c",
+      "46080cyc",
+      "46080cycle",
+      "46080cycles",
+      "t46080angle"
+    ],
+    "46800": [
+      "t46800",
+      "T46800",
+      "46800c",
+      "46800cyc",
+      "46800cycle",
+      "46800cycles",
+      "t46800angle"
+    ],
+    "48240": [
+      "t48240",
+      "T48240",
+      "48240c",
+      "48240cyc",
+      "48240cycle",
+      "48240cycles",
+      "t48240angle"
+    ],
+    "51840": [
+      "t51840",
+      "T51840",
+      "51840c",
+      "51840cyc",
+      "51840cycle",
+      "51840cycles",
+      "t51840angle"
+    ],
+    "59760": [
+      "t59760",
+      "T59760",
+      "59760c",
+      "59760cyc",
+      "59760cycle",
+      "59760cycles",
+      "t59760angle"
+    ],
+    "66960": [
+      "t66960",
+      "T66960",
+      "66960c",
+      "66960cyc",
+      "66960cycle",
+      "66960cycles",
+      "t66960angle"
+    ]
+  },
+  "Pencil Attachment Cycling (PAC) - Rotational": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "200": [
+      "t200",
+      "T200",
+      "200c",
+      "200cyc",
+      "200cycle",
+      "200cycles",
+      "t200rot"
+    ],
+    "500": [
+      "t500",
+      "T500",
+      "500c",
+      "500cyc",
+      "500cycle",
+      "500cycles",
+      "t500rot"
+    ],
+    "1000": [
+      "t1000",
+      "T1000",
+      "1000c",
+      "1000cyc",
+      "1000cycle",
+      "1000cycles",
+      "t1000rot"
+    ],
+    "2200": [
+      "t2200",
+      "T2200",
+      "2200c",
+      "2200cyc",
+      "2200cycle",
+      "2200cycles",
+      "t2200rot"
+    ],
+    "4400": [
+      "t4400",
+      "T4400",
+      "4400c",
+      "4400cyc",
+      "4400cycle",
+      "4400cycles",
+      "t4400rot"
+    ],
+    "12000": [
+      "t12000",
+      "T12000",
+      "12000c",
+      "12000cyc",
+      "12000cycle",
+      "12000cycles",
+      "t12000rot"
+    ]
+  },
+  "Blue Pocket Insertion ": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "500": [
+      "t500",
+      "T500",
+      "500c",
+      "500cyc",
+      "500cycle",
+      "500cycles",
+      "t500bp"
+    ],
+    "2500": [
+      "t2500",
+      "T2500",
+      "2500c",
+      "2500cyc",
+      "2500cycle",
+      "2500cycles",
+      "t2500bp"
+    ],
+    "6500": [
+      "t6500",
+      "T6500",
+      "6500c",
+      "6500cyc",
+      "6500cycle",
+      "6500cycles",
+      "t6500bp"
+    ],
+    "13000": [
+      "t13000",
+      "T13000",
+      "13000c",
+      "13000cyc",
+      "13000cycle",
+      "13000cycles",
+      "t13000bp"
+    ],
+    "19500": [
+      "t19500",
+      "T19500",
+      "19500c",
+      "19500cyc",
+      "19500cycle",
+      "19500cycles",
+      "t19500bp"
+    ],
+    "26000": [
+      "t26000",
+      "T26000",
+      "26000c",
+      "26000cyc",
+      "26000cycle",
+      "26000cycles",
+      "t26000bp"
+    ],
+    "32500": [
+      "t32500",
+      "T32500",
+      "32500c",
+      "32500cyc",
+      "32500cycle",
+      "32500cycles",
+      "t32500bp"
+    ],
+    "39000": [
+      "t39000",
+      "T39000",
+      "39000c",
+      "39000cyc",
+      "39000cycle",
+      "39000cycles",
+      "t39000bp"
+    ],
+    "45500": [
+      "t45500",
+      "T45500",
+      "45500c",
+      "45500cyc",
+      "45500cycle",
+      "45500cycles",
+      "t45500bp"
+    ],
+    "52000": [
+      "t52000",
+      "T52000",
+      "52000c",
+      "52000cyc",
+      "52000cycle",
+      "52000cycles",
+      "t52000bp"
+    ],
+    "58500": [
+      "t58500",
+      "T58500",
+      "58500c",
+      "58500cyc",
+      "58500cycle",
+      "58500cycles",
+      "t58500bp"
+    ],
+    "65000": [
+      "t65000",
+      "T65000",
+      "65000c",
+      "65000cyc",
+      "65000cycle",
+      "65000cycles",
+      "t65000bp"
+    ],
+    "71500": [
+      "t71500",
+      "T71500",
+      "71500c",
+      "71500cyc",
+      "71500cycle",
+      "71500cycles",
+      "t71500bp"
+    ],
+    "78000": [
+      "t78000",
+      "T78000",
+      "78000c",
+      "78000cyc",
+      "78000cycle",
+      "78000cycles",
+      "t78000bp"
+    ]
+  },
+  "Accumulation": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "Round1 Chemical Sensitivity": [
+      "tRound1 Chemical Sensitivity",
+      "TRound1 Chemical Sensitivity",
+      "R1-CS",
+      "Round1 CS",
+      "Round1_Chemical_Sensitivity",
+      "Round1-Chemical-Sensitivity"
+    ],
+    "Round1 Heat Soak": [
+      "tRound1 Heat Soak",
+      "TRound1 Heat Soak",
+      "R1-HS",
+      "Round1 HS",
+      "Round1_Heat_Soak",
+      "Round1-Heat-Soak"
+    ],
+    "Round1 UV": [
+      "tRound1 UV",
+      "TRound1 UV",
+      "R1-UV",
+      "Round1 UV",
+      "Round1_UV",
+      "Round1-UV"
+    ],
+    "Round1 Rep Drop": [
+      "tRound1 Rep Drop",
+      "TRound1 Rep Drop",
+      "R1-RepDrop",
+      "Round1 RepDrop",
+      "Round1_Rep_Drop",
+      "Round1-Rep-Drop"
+    ],
+    "Round1 fedora cycling": [
+      "tRound1 fedora cycling",
+      "TRound1 fedora cycling",
+      "R1-Fedora",
+      "Round1 Fedora",
+      "Round1_fedora_cycling",
+      "Round1-fedora-cycling"
+    ],
+    "Round1 Rock Tumble": [
+      "tRound1 Rock Tumble",
+      "TRound1 Rock Tumble",
+      "R1-RT",
+      "Round1 RT",
+      "Round1_Rock_Tumble",
+      "Round1-Rock-Tumble"
+    ],
+    "Round1 Blue Pocket Insertion": [
+      "tRound1 Blue Pocket Insertion",
+      "TRound1 Blue Pocket Insertion",
+      "R1-BPI",
+      "Round1 BPI",
+      "Round1_Blue_Pocket_Insertion",
+      "Round1-Blue-Pocket-Insertion"
+    ],
+    "Round1 PAC": [
+      "tRound1 PAC",
+      "TRound1 PAC",
+      "R1-PAC",
+      "Round1_PAC",
+      "Round1-PAC"
+    ],
+    "Round1 1x Drop": [
+      "tRound1 1x Drop",
+      "TRound1 1x Drop",
+      "R1-1xDrop",
+      "Round1_1x_Drop",
+      "Round1-1x-Drop"
+    ],
+    "Round2 Round1 Chemical Sensitivity": [
+      "tRound2 R1 CS",
+      "TRound2 R1 CS",
+      "R2-R1-CS",
+      "Round2 CS",
+      "Round2_Round1_Chemical_Sensitivity",
+      "Round2-Round1-Chemical-Sensitivity"
+    ],
+    "Round2 Round1 Heat Soak": [
+      "tRound2 R1 HS",
+      "TRound2 R1 HS",
+      "R2-R1-HS",
+      "Round2 HS",
+      "Round2_Round1_Heat_Soak",
+      "Round2-Round1-Heat-Soak"
+    ],
+    "Round2 Round1 UV": [
+      "tRound2 R1 UV",
+      "TRound2 R1 UV",
+      "R2-R1-UV",
+      "Round2 UV",
+      "Round2_Round1_UV",
+      "Round2-Round1-UV"
+    ],
+    "Round2 Round1 Rep Drop": [
+      "tRound2 R1 Rep Drop",
+      "TRound2 R1 Rep Drop",
+      "R2-R1-RepDrop",
+      "Round2 RepDrop",
+      "Round2_Round1_Rep_Drop",
+      "Round2-Round1-Rep-Drop"
+    ],
+    "Round2 Round1 fedora cycling": [
+      "tRound2 R1 fedora",
+      "TRound2 R1 fedora",
+      "R2-R1-Fedora",
+      "Round2 Fedora",
+      "Round2_Round1_fedora_cycling",
+      "Round2-Round1-fedora-cycling"
+    ],
+    "Round2 Round1 Rock Tumble": [
+      "tRound2 R1 RT",
+      "TRound2 R1 RT",
+      "R2-R1-RT",
+      "Round2 RT",
+      "Round2_Round1_Rock_Tumble",
+      "Round2-Round1-Rock-Tumble"
+    ],
+    "Round2 Round1 Blue Pocket Insertion": [
+      "tRound2 R1 BPI",
+      "TRound2 R1 BPI",
+      "R2-R1-BPI",
+      "Round2 BPI",
+      "Round2_Round1_Blue_Pocket_Insertion",
+      "Round2-Round1-Blue-Pocket-Insertion"
+    ],
+    "Round2 Round1 PAC": [
+      "tRound2 R1 PAC",
+      "TRound2 R1 PAC",
+      "R2-R1-PAC",
+      "Round2_Round1_PAC",
+      "Round2-Round1-PAC"
+    ],
+    "Round2 Round1 1x Drop": [
+      "tRound2 R1 1x Drop",
+      "TRound2 R1 1x Drop",
+      "R2-R1-1xDrop",
+      "Round2_Round1_1x_Drop",
+      "Round2-Round1-1x-Drop"
+    ],
+    "Round3 Round1 Chemical Sensitivity": [
+      "tRound3 R1 CS",
+      "TRound3 R1 CS",
+      "R3-R1-CS",
+      "Round3 CS",
+      "Round3_Round1_Chemical_Sensitivity",
+      "Round3-Round1-Chemical-Sensitivity"
+    ],
+    "Round3 Round1 Heat Soak": [
+      "tRound3 R1 HS",
+      "TRound3 R1 HS",
+      "R3-R1-HS",
+      "Round3 HS",
+      "Round3_Round1_Heat_Soak",
+      "Round3-Round1-Heat-Soak"
+    ],
+    "Round3 Round1 UV": [
+      "tRound3 R1 UV",
+      "TRound3 R1 UV",
+      "R3-R1-UV",
+      "Round3 UV",
+      "Round3_Round1_UV",
+      "Round3-Round1-UV"
+    ],
+    "Round3 Round1 Rep Drop": [
+      "tRound3 R1 Rep Drop",
+      "TRound3 R1 Rep Drop",
+      "R3-R1-RepDrop",
+      "Round3 RepDrop",
+      "Round3_Round1_Rep_Drop",
+      "Round3-Round1-Rep-Drop"
+    ],
+    "Round3 Round1 fedora cycling": [
+      "tRound3 R1 fedora",
+      "TRound3 R1 fedora",
+      "R3-R1-Fedora",
+      "Round3 Fedora",
+      "Round3_Round1_fedora_cycling",
+      "Round3-Round1-fedora-cycling"
+    ],
+    "Round3 Round1 Rock Tumble": [
+      "tRound3 R1 RT",
+      "TRound3 R1 RT",
+      "R3-R1-RT",
+      "Round3 RT",
+      "Round3_Round1_Rock_Tumble",
+      "Round3-Round1-Rock-Tumble"
+    ],
+    "Round3 Round1 Blue Pocket Insertion": [
+      "tRound3 R1 BPI",
+      "TRound3 R1 BPI",
+      "R3-R1-BPI",
+      "Round3 BPI",
+      "Round3_Round1_Blue_Pocket_Insertion",
+      "Round3-Round1-Blue-Pocket-Insertion"
+    ],
+    "Round3 Round1 PAC": [
+      "tRound3 R1 PAC",
+      "TRound3 R1 PAC",
+      "R3-R1-PAC",
+      "Round3_Round1_PAC",
+      "Round3-Round1-PAC"
+    ],
+    "Round3 Round1 1x Drop": [
+      "tRound3 R1 1x Drop",
+      "TRound3 R1 1x Drop",
+      "R3-R1-1xDrop",
+      "Round3_Round1_1x_Drop",
+      "Round3-Round1-1x-Drop"
+    ]
+  },
+  "fedora Cycling - auto": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "1673": [
+      "t1673",
+      "T1673",
+      "1673c",
+      "1673cyc",
+      "1673cycle",
+      "1673cycles",
+      "t1673auto"
+    ],
+    "5019": [
+      "t5019",
+      "T5019",
+      "5019c",
+      "5019cyc",
+      "5019cycle",
+      "5019cycles",
+      "t5019auto"
+    ],
+    "10038": [
+      "t10038",
+      "T10038",
+      "10038c",
+      "10038cyc",
+      "10038cycle",
+      "10038cycles",
+      "t10038auto"
+    ],
+    "20075": [
+      "t20075",
+      "T20075",
+      "20075c",
+      "20075cyc",
+      "20075cycle",
+      "20075cycles",
+      "t20075auto"
+    ],
+    "40150": [
+      "t40150",
+      "T40150",
+      "40150c",
+      "40150cyc",
+      "40150cycle",
+      "40150cycles",
+      "t40150auto"
+    ],
+    "60225": [
+      "t60225",
+      "T60225",
+      "60225c",
+      "60225cyc",
+      "60225cycle",
+      "60225cycles",
+      "t60225auto"
+    ],
+    "80300": [
+      "t80300",
+      "T80300",
+      "80300c",
+      "80300cyc",
+      "80300cycle",
+      "80300cycles",
+      "t80300auto"
+    ],
+    "108405": [
+      "t108405",
+      "T108405",
+      "108405c",
+      "108405cyc",
+      "108405cycle",
+      "108405cycles",
+      "t108405auto"
+    ]
+  },
+  "fedora Cycling - manual": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "1673": [
+      "t1673",
+      "T1673",
+      "1673c",
+      "1673cyc",
+      "1673cycle",
+      "1673cycles",
+      "t1673man"
+    ],
+    "5019": [
+      "t5019",
+      "T5019",
+      "5019c",
+      "5019cyc",
+      "5019cycle",
+      "5019cycles",
+      "t5019man"
+    ],
+    "10038": [
+      "t10038",
+      "T10038",
+      "10038c",
+      "10038cyc",
+      "10038cycle",
+      "10038cycles",
+      "t10038man"
+    ],
+    "20075": [
+      "t20075",
+      "T20075",
+      "20075c",
+      "20075cyc",
+      "20075cycle",
+      "20075cycles",
+      "t20075man"
+    ],
+    "40150": [
+      "t40150",
+      "T40150",
+      "40150c",
+      "40150cyc",
+      "40150cycle",
+      "40150cycles",
+      "t40150man"
+    ],
+    "60225": [
+      "t60225",
+      "T60225",
+      "60225c",
+      "60225cyc",
+      "60225cycle",
+      "60225cycles",
+      "t60225man"
+    ],
+    "80300": [
+      "t80300",
+      "T80300",
+      "80300c",
+      "80300cyc",
+      "80300cycle",
+      "80300cycles",
+      "t80300man"
+    ],
+    "108405": [
+      "t108405",
+      "T108405",
+      "108405c",
+      "108405cyc",
+      "108405cycle",
+      "108405cycles",
+      "t108405man"
+    ]
+  },
+  "fedora Cycling - Stow Fidget": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "6389": [
+      "t6389",
+      "T6389",
+      "6389c",
+      "6389cyc",
+      "6389cycle",
+      "6389cycles",
+      "t6389fidget"
+    ],
+    "19169": [
+      "t19169",
+      "T19169",
+      "19169c",
+      "19169cyc",
+      "19169cycle",
+      "19169cycles",
+      "t19169fidget"
+    ],
+    "38333": [
+      "t38333",
+      "T38333",
+      "38333c",
+      "38333cyc",
+      "38333cycle",
+      "38333cycles",
+      "t38333fidget"
+    ],
+    "76667": [
+      "t76667",
+      "T76667",
+      "76667c",
+      "76667cyc",
+      "76667cycle",
+      "76667cycles",
+      "t76667fidget"
+    ],
+    "153333": [
+      "t153333",
+      "T153333",
+      "153333c",
+      "153333cyc",
+      "153333cycle",
+      "153333cycles",
+      "t153333fidget"
+    ],
+    "230000": [
+      "t230000",
+      "T230000",
+      "230000c",
+      "230000cyc",
+      "230000cycle",
+      "230000cycles",
+      "t230000fidget"
+    ],
+    "306667": [
+      "t306667",
+      "T306667",
+      "306667c",
+      "306667cyc",
+      "306667cycle",
+      "306667cycles",
+      "t306667fidget"
+    ],
+    "383333": [
+      "t383333",
+      "T383333",
+      "383333c",
+      "383333cyc",
+      "383333cycle",
+      "383333cycles",
+      "t383333fidget"
+    ]
+  },
+  "fedora Cycling Overload Test": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "245": [
+      "t245",
+      "T245",
+      "245c",
+      "245cyc",
+      "245cycle",
+      "245cycles",
+      "t245over"
+    ],
+    "736": [
+      "t736",
+      "T736",
+      "736c",
+      "736cyc",
+      "736cycle",
+      "736cycles",
+      "t736over"
+    ],
+    "1473": [
+      "t1473",
+      "T1473",
+      "1473c",
+      "1473cyc",
+      "1473cycle",
+      "1473cycles",
+      "t1473over"
+    ],
+    "2946": [
+      "t2946",
+      "T2946",
+      "2946c",
+      "2946cyc",
+      "2946cycle",
+      "2946cycles",
+      "t2946over"
+    ],
+    "5891": [
+      "t5891",
+      "T5891",
+      "5891c",
+      "5891cyc",
+      "5891cycle",
+      "5891cycles",
+      "t5891over"
+    ],
+    "8837": [
+      "t8837",
+      "T8837",
+      "8837c",
+      "8837cyc",
+      "8837cycle",
+      "8837cycles",
+      "t8837over"
+    ]
+  },
+  "Step on Test": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "25kg-L1": [
+      "t25kg-L1",
+      "T25kg-L1",
+      "25kg L1",
+      "t25kg-l1",
+      "25kg_L1",
+      "25kgL1"
+    ],
+    "25kg-L2": [
+      "t25kg-L2",
+      "T25kg-L2",
+      "25kg L2",
+      "t25kg-l2",
+      "25kg_L2",
+      "25kgL2"
+    ],
+    "25kg-L3": [
+      "t25kg-L3",
+      "T25kg-L3",
+      "25kg L3",
+      "t25kg-l3",
+      "25kg_L3",
+      "25kgL3"
+    ],
+    "50kg-L1": [
+      "t50kg-L1",
+      "T50kg-L1",
+      "50kg L1",
+      "t50kg-l1",
+      "50kg_L1",
+      "50kgL1"
+    ],
+    "50kg-L2": [
+      "t50kg-L2",
+      "T50kg-L2",
+      "50kg L2",
+      "t50kg-l2",
+      "50kg_L2",
+      "50kgL2"
+    ],
+    "50kg-L3": [
+      "t50kg-L3",
+      "T50kg-L3",
+      "50kg L3",
+      "t50kg-l3",
+      "50kg_L3",
+      "50kgL3"
+    ],
+    "100kg-L1": [
+      "t100kg-L1",
+      "T100kg-L1",
+      "100kg L1",
+      "t100kg-l1",
+      "100kg_L1",
+      "100kgL1"
+    ],
+    "100kg-L2": [
+      "t100kg-L2",
+      "T100kg-L2",
+      "100kg L2",
+      "t100kg-l2",
+      "100kg_L2",
+      "100kgL2"
+    ],
+    "100kg-L3": [
+      "t100kg-L3",
+      "T100kg-L3",
+      "100kg L3",
+      "t100kg-l3",
+      "100kg_L3",
+      "100kgL3"
+    ],
+    "Round1 25kg fedora only": [
+      "tRound1 25kg",
+      "TRound1 25kg",
+      "R1-25kg",
+      "25kg R1",
+      "Round1_25kg_fedora_only",
+      "Round1-25kg-fedora-only"
+    ],
+    "Round1 50kg fedora only": [
+      "tRound1 50kg",
+      "TRound1 50kg",
+      "R1-50kg",
+      "50kg R1",
+      "Round1_50kg_fedora_only",
+      "Round1-50kg-fedora-only"
+    ],
+    "Round1 100kg fedora only": [
+      "tRound1 100kg",
+      "TRound1 100kg",
+      "R1-100kg",
+      "100kg R1",
+      "Round1_100kg_fedora_only",
+      "Round1-100kg-fedora-only"
+    ],
+    "Round2 25kg fedora only": [
+      "tRound2 25kg",
+      "TRound2 25kg",
+      "R2-25kg",
+      "25kg R2",
+      "Round2_25kg_fedora_only",
+      "Round2-25kg-fedora-only"
+    ]
+  },
+  "Bite Test (Posted -> Removed)": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "28": [
+      "t28",
+      "T28",
+      "28c",
+      "28cyc",
+      "28cycle",
+      "28cycles",
+      "t28bite"
+    ],
+    "2509": [
+      "t2509",
+      "T2509",
+      "2509c",
+      "2509cyc",
+      "2509cycle",
+      "2509cycles",
+      "t2509bite"
+    ],
+    "7528": [
+      "t7528",
+      "T7528",
+      "7528c",
+      "7528cyc",
+      "7528cycle",
+      "7528cycles",
+      "t7528bite"
+    ],
+    "10038": [
+      "t10038",
+      "T10038",
+      "10038c",
+      "10038cyc",
+      "10038cycle",
+      "10038cycles",
+      "t10038bite"
+    ],
+    "20075": [
+      "t20075",
+      "T20075",
+      "20075c",
+      "20075cyc",
+      "20075cycle",
+      "20075cycles",
+      "t20075bite"
+    ],
+    "30113": [
+      "t30113",
+      "T30113",
+      "30113c",
+      "30113cyc",
+      "30113cycle",
+      "30113cycles",
+      "t30113bite"
+    ],
+    "1095": [
+      "t1095",
+      "T1095",
+      "1095c",
+      "1095cyc",
+      "1095cycle",
+      "1095cycles",
+      "t1095bite"
+    ],
+    "2190": [
+      "t2190",
+      "T2190",
+      "2190c",
+      "2190cyc",
+      "2190cycle",
+      "2190cycles",
+      "t2190bite"
+    ]
+  },
+  "fedora Only Sit Test": {
+    "T0": [
+      "t0",
+      "to",
+      "T"
+    ],
+    "1": [
+      "t1",
+      "T1",
+      "1c",
+      "1cyc",
+      "1cycle",
+      "1cycles",
+      "t1fedora"
+    ],
+    "2": [
+      "t2",
+      "T2",
+      "2c",
+      "2cyc",
+      "2cycle",
+      "2cycles",
+      "t2fedora"
+    ],
+    "3": [
+      "t3",
+      "T3",
+      "3c",
+      "3cyc",
+      "3cycle",
+      "3cycles",
+      "t3fedora"
+    ],
+    "4": [
+      "t4",
+      "T4",
+      "4c",
+      "4cyc",
+      "4cycle",
+      "4cycles",
+      "t4fedora"
+    ],
+    "5": [
+      "t5",
+      "T5",
+      "5c",
+      "5cyc",
+      "5cycle",
+      "5cycles",
+      "t5fedora"
+    ],
+    "6": [
+      "t6",
+      "T6",
+      "6c",
+      "6cyc",
+      "6cycle",
+      "6cycles",
+      "t6fedora"
+    ],
+    "7": [
+      "t7",
+      "T7",
+      "7c",
+      "7cyc",
+      "7cycle",
+      "7cycles",
+      "t7fedora"
+    ],
+    "8": [
+      "t8",
+      "T8",
+      "8c",
+      "8cyc",
+      "8cycle",
+      "8cycles",
+      "t8fedora"
+    ],
+    "9": [
+      "t9",
+      "T9",
+      "9c",
+      "9cyc",
+      "9cycle",
+      "9cycles",
+      "t9fedora"
+    ],
+    "10": [
+      "t10",
+      "T10",
+      "10c",
+      "10cyc",
+      "10cycle",
+      "10cycles",
+      "t10fedora"
+    ],
+    "25": [
+      "t25",
+      "T25",
+      "25c",
+      "25cyc",
+      "25cycle",
+      "25cycles",
+      "t25fedora"
+    ],
+    "50": [
+      "t50",
+      "T50",
+      "50c",
+      "50cyc",
+      "50cycle",
+      "50cycles",
+      "t50fedora"
+    ],
+    "75": [
+      "t75",
+      "T75",
+      "75c",
+      "75cyc",
+      "75cycle",
+      "75cycles",
+      "t75fedora"
+    ],
+    "100": [
+      "t100",
+      "T100",
+      "100c",
+      "100cyc",
+      "100cycle",
+      "100cycles",
+      "t100fedora"
+    ],
+    "200": [
+      "t200",
+      "T200",
+      "200c",
+      "200cyc",
+      "200cycle",
+      "200cycles",
+      "t200fedora"
+    ],
+    "300": [
+      "t300",
+      "T300",
+      "300c",
+      "300cyc",
+      "300cycle",
+      "300cycles",
+      "t300fedora"
+    ],
+    "400": [
+      "t400",
+      "T400",
+      "400c",
+      "400cyc",
+      "400cycle",
+      "400cycles",
+      "t400fedora"
+    ],
+    "3500": [
+      "t3500",
+      "T3500",
+      "3500c",
+      "3500cyc",
+      "3500cycle",
+      "3500cycles",
+      "t3500fedora"
+    ],
+    "7000": [
+      "t7000",
+      "T7000",
+      "7000c",
+      "7000cyc",
+      "7000cycle",
+      "7000cycles",
+      "t7000fedora"
     ]
   }
 }
