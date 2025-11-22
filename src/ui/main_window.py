@@ -126,6 +126,7 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.status_bar)
         self.apply_styles()
 
+
     def apply_styles(self):
         qss_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'styles',
                                 'sonoma.qss')
@@ -165,7 +166,60 @@ class MainWindow(QMainWindow):
             self.parser_engine.orient_map = self.orient_map
 
             self.file_processor.settings = self.settings
-            self.status_bar.update_status(self.model.rowCount(), 0, "Settings Reloaded")
+            
+            # --- 🔥🔥🔥 修复点：检测路径变更并刷新 UI 🔥🔥🔥 ---
+            last_session = self.settings.get('last_session', {})
+            
+            # 1. 检查 Excel 变更
+            new_excel = last_session.get('excel_path')
+            if new_excel and os.path.exists(new_excel):
+                # 如果路径变了，或者当前没加载 Excel，则重新加载
+                current_excel_text = self.btn_excel.toolTip()
+                if new_excel != current_excel_text:
+                    self.load_excel(new_excel)
+
+            # 2. 检查 Regular Output 变更
+            new_reg = last_session.get('regular_output_dir')
+            if new_reg:
+                self.btn_reg_dir.setText(f"📂 标准照输出路径: {os.path.basename(new_reg)}")
+                self.btn_reg_dir.setToolTip(new_reg)
+
+            # 3. 检查 Issue Output 变更
+            new_issue = last_session.get('issue_output_dir')
+            if new_issue:
+                self.btn_issue_dir.setText(f"📂 失效照输出路径: {os.path.basename(new_issue)}")
+                self.btn_issue_dir.setToolTip(new_issue)
+
+            # 4. 刷新列表数据 (重新解析)
+            self.refresh_list()
+            
+            self.status_bar.update_status(self.model.rowCount(), 0, "Settings Reloaded & List Refreshed")
+
+    def refresh_list(self):
+        """
+        当设置发生变化时（如非法字符、映射表等），
+        重新遍历当前列表中的所有文件，使用新配置重新解析。
+        """
+        if self.model.rowCount() == 0:
+            return
+        
+        updated_count = 0
+        for i, item in enumerate(self.model.data_list):
+            src_path = item['original_path']
+            
+            # 1. 重新解析
+            new_res = self.parser_engine.parse_filename(src_path)
+            
+            # 2. 重新生成目标路径
+            target_path, target_name = self.file_processor.generate_target_path(new_res)
+            new_res['target_filename'] = target_name
+            new_res['target_full_path'] = target_path
+            
+            # 3. 更新 Model
+            self.model.update_row(i, new_res)
+            updated_count += 1
+
+        print(f"Refreshed {updated_count} items with new settings.")
 
     def browse_excel(self):
         # 🔥 修改点：过滤器改为 *.csv
@@ -184,8 +238,6 @@ class MainWindow(QMainWindow):
             self.status_bar.update_status(0, 0, "CSV Loaded")
         else:
             QMessageBox.critical(self, "Error", msg)
-
-
 
     def browse_output(self, type_):
         path = QFileDialog.getExistingDirectory(self, f"Select {type_} Output Directory")
