@@ -1,7 +1,7 @@
 import os
 from PySide6.QtWidgets import (
     QDialog, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget,
-    QPushButton, QListWidgetItem, QMessageBox, QWidget  # 🔥 补上了 QWidget
+    QPushButton, QListWidgetItem, QMessageBox, QWidget
 )
 from PySide6.QtCore import Qt, QSize
 from src.core.config_manager import ConfigManager
@@ -16,7 +16,7 @@ from src.ui.settings_pages.libraries_page import LibrariesPage
 class SettingsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Settings - Photo Renamer Pro")
+        self.setWindowTitle("设置 - Photo Renamer Pro")
         self.resize(1000, 750)
         self.setModal(True)
 
@@ -101,15 +101,18 @@ class SettingsDialog(QDialog):
             csv_keys = self.mapping_page.get_current_keys()
             # 2. 获取 解析变量的 Key (如 "哈哈")
             parsed_keys = self.mapping_page.get_parsed_vars()
+            # 3. 获取 sys_id 映射
+            sys_id_map = self.mapping_page.get_sys_id_map()
 
-            # 3. 刷新模板页的胶囊按钮
-            self.templates_page.refresh_chips(csv_keys, parsed_keys)
+            # 4. 刷新模板页的胶囊按钮
+            self.templates_page.refresh_chips(csv_keys, parsed_keys, sys_id_map)
 
     def save_all_settings(self):
         # 1. 通知各个页面把界面数据写回 self.current_settings
         self.general_page.save_data()
         self.templates_page.save_data()
         self.mapping_page.save_data()
+        # libraries_page 保存逻辑可能不同，这里假设它实时保存或不需要显式调用 save_data
 
         # 2. 保存文件
         ConfigManager.save_settings(self.current_settings)
@@ -117,7 +120,7 @@ class SettingsDialog(QDialog):
         ConfigManager.save_issue_map(self.issue_map)
         ConfigManager.save_orient_map(self.orient_map)
 
-        QMessageBox.information(self, "Success", "所有配置已成功保存！")
+        QMessageBox.information(self, "成功", "所有配置已成功保存！")
         self.accept()
 
     def apply_styles(self):

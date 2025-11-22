@@ -47,15 +47,33 @@ class MappingPage(QWidget):
 
         # 加载现有映射
         current_map = self.settings.get('excel_header_map', {})
+        # 🔥 加载保存的 sys_id 映射 (用于恢复重命名后的变量关系)
+        saved_sys_id_map = self.settings.get('internal_sys_id_map', {})
+
         priority_keys = ["Rel_No", "Test", "SN", "Build", "Config", "Mode", "WF"]
         existing_keys = list(current_map.keys())
 
+        # 1. 先处理优先级 Key (系统默认名)
         for pk in priority_keys:
             if pk in existing_keys:
-                self.add_mapping_row(pk, current_map[pk])
+                self.add_mapping_row(pk, current_map[pk], sys_id=pk)
                 existing_keys.remove(pk)
+        
+        # 2. 处理剩余 Key (可能是用户自定义或重命名的)
         for k in existing_keys:
-            self.add_mapping_row(k, current_map[k])
+            # 尝试恢复 sys_id
+            s_id = saved_sys_id_map.get(k)
+            
+            # 🔥 强行修正: 如果变量名是 No，必须关联到 Rel_No (即使之前保存了错误的关系)
+            if k == "No":
+                s_id = "Rel_No"
+            
+            # 如果没找到，尝试推断
+            if s_id is None:
+                if k in priority_keys:
+                    s_id = k
+            
+            self.add_mapping_row(k, current_map[k], sys_id=s_id)
 
         # 新增按钮
         btn_add = QPushButton("＋ 新增映射字段")
@@ -112,7 +130,7 @@ class MappingPage(QWidget):
 
         grid.addWidget(wrapper, r, 2)
 
-    def add_mapping_row(self, key_text, value_text):
+    def add_mapping_row(self, key_text, value_text, sys_id=None):
         row_widget = QWidget()
         row_layout = QHBoxLayout(row_widget)
         row_layout.setContentsMargins(0, 0, 0, 0)
@@ -143,13 +161,12 @@ class MappingPage(QWidget):
         row_layout.addWidget(edt_val, 3)
         row_layout.addWidget(btn_del)
 
-        row_data = {'widget': row_widget, 'key': edt_key, 'value': edt_val}
+        row_data = {'widget': row_widget, 'key': edt_key, 'value': edt_val, 'sys_id': sys_id}
         self.mapping_rows.append(row_data)
 
         btn_del.clicked.connect(lambda: self.delete_mapping_row(row_data))
         self.rows_layout.addWidget(row_widget)
 
-    # 🔥🔥🔥 修复点：增加删除确认 🔥🔥🔥
     def delete_mapping_row(self, row_data):
         key_name = row_data['key'].text().strip()
         if not key_name: key_name = "此空行"
@@ -182,13 +199,36 @@ class MappingPage(QWidget):
             'Issue': self.widgets['parsed_map']['Issue'].text().strip() or "Issue"
         }
 
+    def get_sys_id_map(self):
+        """返回系统ID到用户Key的映射，例如: {'Rel_No': 'No', 'Build': 'Build', ...}"""
+        id_map = {}
+        for row in self.mapping_rows:
+            user_key = row['key'].text().strip()
+            sys_id = row.get('sys_id')
+            if user_key and sys_id:
+                id_map[sys_id] = user_key
+        return id_map
+
     def save_data(self):
         new_map = {}
+        sys_id_map_save = {}  # 用于持久化保存 sys_id 关系
+        
         for row_data in self.mapping_rows:
             k = row_data['key'].text().strip()
             v = row_data['value'].text().strip()
-            if k and v: new_map[k] = v
+            sys_id = row_data.get('sys_id')
+            
+            # 🔥 强行修正: 如果变量名是 No，必须关联到 Rel_No (即使之前保存了错误的关系)
+            if k == "No":
+                sys_id = "Rel_No"
+
+            if k and v: 
+                new_map[k] = v
+                if sys_id:
+                    sys_id_map_save[k] = sys_id
+                    
         self.settings['excel_header_map'] = new_map
+        self.settings['internal_sys_id_map'] = sys_id_map_save
 
         self.settings['regular_photo']['parsed_data_map']['CP'] = self.widgets['parsed_map']['CP'].text()
         self.settings['regular_photo']['parsed_data_map']['O'] = self.widgets['parsed_map']['O'].text()

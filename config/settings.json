@@ -1,7 +1,7 @@
 {
   "last_session": {
-    "excel_path": "",
-    "regular_output_dir": "C:/Users/admin/Desktop/重构",
+    "excel_path": "C:/Users/admin/Desktop/重构/regular错误示例.csv",
+    "regular_output_dir": "C:/Users/admin/Desktop/重构/put",
     "issue_output_dir": "C:/Users/admin/Desktop/重构/put"
   },
   "excel_header_map": {
@@ -11,19 +11,19 @@
     "Config": "Config",
     "Mode": "Mode",
     "WF": "WF",
-    "Rel no": "No#"
+    "No": "No#"
   },
   "regular_photo": {
-    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_WF{WF}_{Test}_{CP}-{方向}",
-    "template_folder": "{Test}/{Config}/{Mode}/{SN}",
+    "template_name": "{Build}_{Config}_{No}_{SN}_{Mode}_WF{WF}_{Test}_{CP}-{方向}",
+    "template_folder": "{Test}/{Config}/{Mode}/{No}",
     "parsed_data_map": {
       "CP": "CP",
       "O": "方向"
     }
   },
   "issue_photo": {
-    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_{WF}-{Test}_{CP}-{Issue}",
-    "template_folder": "{Test}/{Config}/{Mode}/{Rel_No}",
+    "template_name": "{Build}_{Config}_{No}_{SN}_{Mode}_{WF}-{Test}_{CP}-{Issue}",
+    "template_folder": "{Test}/{Config}/{Mode}/{No}",
     "parsed_data_map": {
       "CP": "CP",
       "Issue": "Issue"
@@ -39,5 +39,14 @@
     "<",
     ">",
     "|"
-  ]
+  ],
+  "internal_sys_id_map": {
+    "Test": "Test",
+    "SN": "SN",
+    "Build": "Build",
+    "Config": "Config",
+    "Mode": "Mode",
+    "WF": "WF",
+    "No": "Rel_No"
+  }
 }

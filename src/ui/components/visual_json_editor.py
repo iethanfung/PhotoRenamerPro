@@ -77,17 +77,44 @@ class VisualJsonEditor(QWidget):
         root = self.tree.invisibleRootItem()
         for i in range(root.childCount()):
             item = root.child(i)
-            self._filter_recursive(item, text)
+            # 🔥🔥🔥 修复点：初始调用时，parent_matches 为 False 🔥🔥🔥
+            self._filter_recursive(item, text, parent_matches=False)
 
-    def _filter_recursive(self, item, text):
-        match = text in item.text(0).lower()
-        child_match = False
+    def _filter_recursive(self, item, text, parent_matches):
+        """
+        item: 当前节点
+        text: 搜索关键词
+        parent_matches: 父节点是否已经匹配上了（如果父节点匹配，子节点无条件显示）
+        """
+        # 1. 自己是否匹配关键词
+        self_matches = text in item.text(0).lower()
+
+        # 2. 是否应该强制显示子节点？
+        # 逻辑：如果【父节点匹配了】或者【我自己匹配了】，那么【我的子节点】都应该被强制显示，以便用户看到完整结构
+        force_show_children = parent_matches or self_matches
+
+        # 3. 递归检查子节点
+        any_child_visible = False
         for i in range(item.childCount()):
-            if self._filter_recursive(item.child(i), text):
-                child_match = True
-        should_show = match or child_match
+            child = item.child(i)
+            # 将“强制显示”的状态传递给下一级
+            child_visible = self._filter_recursive(child, text, parent_matches=force_show_children)
+            if child_visible:
+                any_child_visible = True
+
+        # 4. 决定我自己是否显示
+        # 显示条件（满足其一即可）：
+        # A. 上级命令我显示 (parent_matches 为 True)
+        # B. 我自己匹配上了 (self_matches 为 True)
+        # C. 我的下级里有内容要显示 (any_child_visible 为 True，即搜索的是子节点的情况)
+        should_show = parent_matches or self_matches or any_child_visible
+
         item.setHidden(not should_show)
-        if should_show: item.setExpanded(True)
+
+        # 如果显示，展开以便看到内容
+        if should_show:
+            item.setExpanded(True)
+
         return should_show
 
     def open_context_menu(self, position):

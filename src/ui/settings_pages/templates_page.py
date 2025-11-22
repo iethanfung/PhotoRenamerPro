@@ -11,13 +11,13 @@ class TemplatesPage(QWidget):
             'issue_template': {}
         }
 
-        # 🔥 1. 初始化默认的 Mock 数据值 (不带 Key)
-        self.mock_values = {
+        # 🔥 内部标准 Mock 数据 (Key 是 sys_id)
+        self.internal_mock_data = {
             "Build": "P1", "Config": "R1", "Rel_No": "0065",
             "SN": "SN123456", "Mode": "Stow", "WF": "2", "Test": "1mG",
-            "__CP__": "25Drop",  # 内部占位符
-            "__O__": "O1",  # 内部占位符
-            "__Issue__": "Crack"  # 内部占位符
+            "__CP__": "25Drop",
+            "__O__": "O1",
+            "__Issue__": "Crack"
         }
 
         # 🔥 2. 暂存当前的变量名映射 (默认值)
@@ -26,7 +26,8 @@ class TemplatesPage(QWidget):
             'O': 'Orient',
             'Issue': 'Issue'
         }
-        self.current_csv_keys = ["Build", "Config", "Rel_No", "SN", "Mode", "WF", "Test"]
+
+        self.current_sys_id_map = {}  # 存储 sys_id -> user_key
 
         self.init_ui()
 
@@ -95,19 +96,19 @@ class TemplatesPage(QWidget):
         pl.addWidget(lbl_folder)
         layout.addWidget(preview)
 
-        # 初始时调用一次预览 (可能此时还没有最新的 keys，用默认的)
+        # 初始时调用一次预览
         self.update_preview(is_issue)
 
-    def refresh_chips(self, mapping_keys, parsed_vars):
-        """由主对话框调用，传入最新的 Mapping Keys 和 Parsed Vars"""
+    def refresh_chips(self, mapping_keys, parsed_vars, sys_id_map):
+        """由主对话框调用，传入最新的  Keys 和 Parsed Vars"""
         # 🔥 3. 更新暂存的映射关系
-        self.current_csv_keys = mapping_keys
+        self.current_sys_id_map = sys_id_map
         self.current_parsed_vars = parsed_vars
 
         self._rebuild_chips(self.widgets['reg_template'], mapping_keys, parsed_vars, is_issue=False)
         self._rebuild_chips(self.widgets['issue_template'], mapping_keys, parsed_vars, is_issue=True)
 
-        # 🔥 4. 刷新预览 (确保刚才改的 {哈哈} 能立刻生效)
+        # 🔥 4. 刷新预览
         self.update_preview(is_issue=False)
         self.update_preview(is_issue=True)
 
@@ -143,29 +144,30 @@ class TemplatesPage(QWidget):
         name_tmpl = store['name'].text()
         folder_tmpl = store['folder'].text()
 
-        # 🔥🔥🔥 5. 动态构建当次预览数据 🔥🔥🔥
-        # 使用用户当前定义的 Key (如 "哈哈") 映射到我们的 Mock Value ("O1")
+        # 🔥🔥🔥 动态构建预览数据 🔥🔥🔥
         preview_data = {}
 
-        # A. 映射 CSV 变量 (假设 CSV 的 Key 和 Mock 的 Key 是一致的，简化处理)
-        # 如果用户改了 CSV 映射的 Key 名，这里其实也应该动态匹配，但暂时沿用默认值
-        for k, v in self.mock_values.items():
-            if not k.startswith("__"):
-                preview_data[k] = v
+        # 1. 映射 CSV 变量
+        # 遍历内部 mock 数据，查看是否有对应的 User Key
+        for sys_id, val in self.internal_mock_data.items():
+            if sys_id in self.current_sys_id_map:
+                user_key = self.current_sys_id_map[sys_id]
+                preview_data[user_key] = val
+            elif not sys_id.startswith("__"):
+                # 如果用户删了这个映射，或者这是个未映射的标准字段，暂且保留原名作为 key
+                preview_data[sys_id] = val
 
-        # B. 映射解析变量 (CP, Orient, Issue)
-        # 获取用户设置的 Key 名 (比如 "哈哈")
+        # 2. 映射解析变量
         user_cp_key = self.current_parsed_vars.get('CP', 'CP')
         user_orient_key = self.current_parsed_vars.get('O', 'Orient')
         user_issue_key = self.current_parsed_vars.get('Issue', 'Issue')
 
-        # 填入数据
-        preview_data[user_cp_key] = self.mock_values["__CP__"]
+        preview_data[user_cp_key] = self.internal_mock_data["__CP__"]
 
         if is_issue:
-            preview_data[user_issue_key] = self.mock_values["__Issue__"]
+            preview_data[user_issue_key] = self.internal_mock_data["__Issue__"]
         else:
-            preview_data[user_orient_key] = self.mock_values["__O__"]
+            preview_data[user_orient_key] = self.internal_mock_data["__O__"]
 
         # 执行替换
         for k, v in preview_data.items():
