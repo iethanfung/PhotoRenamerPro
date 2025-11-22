@@ -1,24 +1,24 @@
 {
   "last_session": {
-    "excel_path": "C:/Users/admin/Desktop/重构/机台信息表.xlsx",
-    "regular_output_dir": "C:/Users/admin/Desktop/重构/put",
+    "excel_path": "",
+    "regular_output_dir": "C:/Users/admin/Desktop/重构",
     "issue_output_dir": "C:/Users/admin/Desktop/重构/put"
   },
   "excel_header_map": {
+    "Test": "Test",
+    "SN": "SN",
     "Build": "Build",
     "Config": "Config",
-    "Rel_No": "No#",
-    "SN": "SN",
     "Mode": "Mode",
     "WF": "WF",
-    "Test": "Test"
+    "Rel no": "No#"
   },
   "regular_photo": {
-    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_WF{WF}-{Test}_{CP}-{Orient}",
+    "template_name": "{Build}_{Config}_{Rel_No}_{SN}_{Mode}_WF{WF}_{Test}_{CP}-{方向}",
     "template_folder": "{Test}/{Config}/{Mode}/{SN}",
     "parsed_data_map": {
       "CP": "CP",
-      "O": "Orient"
+      "O": "方向"
     }
   },
   "issue_photo": {

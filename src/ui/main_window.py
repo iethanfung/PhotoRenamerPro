@@ -27,9 +27,10 @@ class MainWindow(QMainWindow):
         self.settings = ConfigManager.load_settings()
         self.cp_map = ConfigManager.load_cp_map()
         self.issue_map = ConfigManager.load_issue_map()
+        self.orient_map = ConfigManager.load_orient_map()
 
         self.excel_engine = ExcelEngine()
-        self.parser_engine = ParserEngine(self.excel_engine, self.settings, self.cp_map, self.issue_map)
+        self.parser_engine = ParserEngine(self.excel_engine, self.settings, self.cp_map, self.issue_map,self.orient_map)
         self.file_processor = FileProcessor(self.settings)
 
         self.init_ui()
@@ -45,13 +46,13 @@ class MainWindow(QMainWindow):
         # 2. 恢复 Regular 输出路径
         last_reg_out = last_session.get('regular_output_dir')
         if last_reg_out and os.path.exists(last_reg_out):
-            self.btn_reg_dir.setText(f"📂 Reg Out: {os.path.basename(last_reg_out)}")
+            self.btn_reg_dir.setText(f"📂 标准照输出路径: {os.path.basename(last_reg_out)}")
             self.btn_reg_dir.setToolTip(last_reg_out)  # 鼠标悬停显示全路径
 
         # 3. 恢复 Issue 输出路径
         last_issue_out = last_session.get('issue_output_dir')
         if last_issue_out and os.path.exists(last_issue_out):
-            self.btn_issue_dir.setText(f"📂 Issue Out: {os.path.basename(last_issue_out)}")
+            self.btn_issue_dir.setText(f"📂 失效照输出路径: {os.path.basename(last_issue_out)}")
             self.btn_issue_dir.setToolTip(last_issue_out)
 
     def init_ui(self):
@@ -68,11 +69,11 @@ class MainWindow(QMainWindow):
 
         left_panel = QWidget()
         left_layout = QVBoxLayout(left_panel)
-        self.btn_excel = QPushButton("📄 Load Excel")
+        self.btn_excel = QPushButton("📄 导入机台信息CSV格式的文件")
         self.btn_excel.clicked.connect(self.browse_excel)
-        self.btn_reg_dir = QPushButton("📂 Regular Output Dir")
+        self.btn_reg_dir = QPushButton("📂 选择标准照输出文件夹")
         self.btn_reg_dir.clicked.connect(lambda: self.browse_output('regular'))
-        self.btn_issue_dir = QPushButton("📂 Issue Output Dir")
+        self.btn_issue_dir = QPushButton("📂 选择问题照输出文件夹")
         self.btn_issue_dir.clicked.connect(lambda: self.browse_output('issue'))
 
         for btn in [self.btn_excel, self.btn_reg_dir, self.btn_issue_dir]:
@@ -154,14 +155,21 @@ class MainWindow(QMainWindow):
             self.settings = ConfigManager.load_settings()
             self.cp_map = ConfigManager.load_cp_map()
             self.issue_map = ConfigManager.load_issue_map()
+            # 🔥 重新加载 Orient Map
+            self.orient_map = ConfigManager.load_orient_map()
+
+            # 🔥 更新引擎引用
             self.parser_engine.settings = self.settings
             self.parser_engine.cp_map = self.cp_map
             self.parser_engine.issue_map = self.issue_map
+            self.parser_engine.orient_map = self.orient_map
+
             self.file_processor.settings = self.settings
             self.status_bar.update_status(self.model.rowCount(), 0, "Settings Reloaded")
 
     def browse_excel(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Select Unit Excel", "", "Excel Files (*.xlsx *.xls)")
+        # 🔥 修改点：过滤器改为 *.csv
+        path, _ = QFileDialog.getOpenFileName(self, "Select Unit CSV", "", "CSV Files (*.csv);;All Files (*)")
         if path:
             self.load_excel(path)
             self.settings['last_session']['excel_path'] = path
@@ -170,14 +178,14 @@ class MainWindow(QMainWindow):
     def load_excel(self, path):
         ok, msg = self.excel_engine.load_excel(path, self.settings['excel_header_map'])
         if ok:
-            self.btn_excel.setText(f"📄 Excel: {os.path.basename(path)}")
-
-            # 🔥🔥🔥 修复点 2：补上 Excel 按钮的悬停提示 🔥🔥🔥
+            # 🔥 修改点：显示文本改为 CSV
+            self.btn_excel.setText(f"📄 CSV: {os.path.basename(path)}")
             self.btn_excel.setToolTip(path)
-
-            self.status_bar.update_status(0, 0, "Excel Loaded")
+            self.status_bar.update_status(0, 0, "CSV Loaded")
         else:
             QMessageBox.critical(self, "Error", msg)
+
+
 
     def browse_output(self, type_):
         path = QFileDialog.getExistingDirectory(self, f"Select {type_} Output Directory")
@@ -246,59 +254,199 @@ class MainWindow(QMainWindow):
     def on_data_changed(self, top_left, bottom_right):
         row = top_left.row()
         col = top_left.column()
-
         if col == self.model.COL_INDEX: return
 
-        # 只有值真正改变了，才会进到这里 (因为 Model 的 setData 拦截了无修改的情况)
+        # 1. 物理重命名逻辑
+        if col == self.model.COL_NAME:
+            item = self.model.data_list[row]
+            old_full_path = item['original_path']
+            new_name = item['original_name']
+            dir_name = os.path.dirname(old_full_path)
+            new_full_path = os.path.join(dir_name, new_name)
+            try:
+                if not os.path.splitext(new_name)[1]:
+                    _, old_ext = os.path.splitext(old_full_path)
+                    new_full_path += old_ext
+                    new_name += old_ext
+                if os.path.exists(new_full_path): raise FileExistsError("File exists")
+                os.rename(old_full_path, new_full_path)
+                self.model.update_source_path(row, new_full_path)
+                new_res = self.parser_engine.parse_filename(new_full_path)
+                target_path, target_name = self.file_processor.generate_target_path(new_res)
+                new_res['target_filename'] = target_name
+                new_res['target_full_path'] = target_path
+                self.model.update_row(row, new_res)
+            except Exception as e:
+                QMessageBox.critical(self, "Rename Failed", str(e))
+                self.model.data_list[row]['original_name'] = os.path.basename(old_full_path)
+                self.model.dataChanged.emit(top_left, bottom_right)
+            return
+
+        # 2. 自学习与重算逻辑
         if col == self.model.COL_STD_CP or col == self.model.COL_DETAIL:
             item = self.model.data_list[row]
-
             raw_cp = item['parse_result']['raw_cp']
-            std_cp = item['parse_result']['std_cp']
-
             raw_detail = item['parse_result'].get('raw_detail', '')
-            detail = item['parse_result']['detail']
-
             test = item['parse_result']['unit_data'].get('Test', 'Unknown')
-            type_ = item['parse_result']['type']
 
-            # 1. 空值处理
-            if not std_cp or not std_cp.strip():
-                std_cp = "[Unknown CP]"
-                if type_ == 'Regular':
-                    item['parse_result']['status_color'] = COLOR_ORANGE
-                    item['parse_result']['status_msg'] = "Fix CP"
+            # 获取用户修改后的值
+            user_std_cp = item['parse_result']['std_cp']
+            user_detail = item['parse_result']['detail']
+
+            map_updated = False
+
+            # A. CP 学习
+            if col == self.model.COL_STD_CP:
+                if user_std_cp and user_std_cp != "[Unknown CP]" and raw_cp:
+                    success, msg = Learner.learn_new_cp_alias(test, user_std_cp, raw_cp)
+                    if success:
+                        map_updated = True
+                    else:
+                        QMessageBox.critical(self, "Error", msg)
+
+            # B. Detail 学习
+            if col == self.model.COL_DETAIL:
+                import re
+                is_orient = re.match(r'(?i)^O\d+$', user_detail) or (user_detail in self.orient_map)
+                if is_orient and raw_detail:
+                    success, msg = Learner.learn_new_orient_alias(user_detail, raw_detail)
+                    if success:
+                        map_updated = True
+                    else:
+                        QMessageBox.critical(self, "Error", msg)
+                elif user_detail != "[Unknown]" and user_detail != "[Unknown Issue]" and raw_detail:
+                    if user_detail and user_detail.strip():
+                        success, msg = Learner.learn_new_issue_alias(user_detail, raw_detail)
+                        if success:
+                            map_updated = True
+                        else:
+                            QMessageBox.critical(self, "Error", msg)
+
+            # 🔥🔥🔥 核心修改：重算与回填 🔥🔥🔥
+            if map_updated:
+                # 1. 重新加载 Map
+                self.cp_map = ConfigManager.load_cp_map()
+                self.issue_map = ConfigManager.load_issue_map()
+                self.orient_map = ConfigManager.load_orient_map()
+                self.parser_engine.cp_map = self.cp_map
+                self.parser_engine.issue_map = self.issue_map
+                self.parser_engine.orient_map = self.orient_map
+
+                # 2. 重新解析
+                new_res = self.parser_engine.parse_filename(item['original_path'])
+
+                # 3. 校验：算法是否真的学会了？(检查重算结果是否匹配用户输入)
+                # 如果匹配，说明置信度是真实的；如果不匹配，说明学漏了或者其他原因，强制覆盖
+                if col == self.model.COL_STD_CP and new_res['std_cp'] != user_std_cp:
+                    new_res['std_cp'] = user_std_cp
+                    new_res['confidence'] = 1.0  # 算法没跟上，人工强制满分
+
+                if col == self.model.COL_DETAIL and new_res['detail'] != user_detail:
+                    new_res['detail'] = user_detail
+                    new_res['confidence'] = 1.0
+
+                item['parse_result'] = new_res
+
             else:
+                # 如果没有触发学习（比如只是改了值但没法学），手动置 1.0
+                item['parse_result']['confidence'] = 1.0
                 item['parse_result']['status_color'] = COLOR_GREEN
                 item['parse_result']['status_msg'] = "Ready"
 
-                # 2. 触发 CP 自学习
-                if col == self.model.COL_STD_CP and type_ == 'Regular' and raw_cp:
-                    Learner.learn_new_cp_alias(test, std_cp, raw_cp)
-                    self.cp_map = ConfigManager.load_cp_map()
-                    self.parser_engine.cp_map = self.cp_map
-
-            # 3. 🔥🔥🔥 触发 Issue 自学习 🔥🔥🔥
-            # 如果修改的是 Detail 列，且类型是 Issue，且有原始词
-            if col == self.model.COL_DETAIL and type_ == 'Issue' and raw_detail:
-                # 只有当用户输入了有效的新 Issue 名时才学习
-                if detail and detail.strip():
-                    Learner.learn_new_issue_alias(detail, raw_detail)
-                    self.issue_map = ConfigManager.load_issue_map()
-                    self.parser_engine.issue_map = self.issue_map
-
-            # 4. 更新内存并重新生成路径
-            item['parse_result']['std_cp'] = std_cp
-            item['parse_result']['detail'] = detail
-            item['parse_result']['confidence'] = 1.0
-
+            # 重新生成路径
             target_path, target_name = self.file_processor.generate_target_path(item['parse_result'])
             item['parse_result']['target_filename'] = target_name
             item['parse_result']['target_full_path'] = target_path
 
             self.model.update_row(row, item['parse_result'])
 
-        # 🔥🔥🔥 修复点 2: 冲突处理逻辑 🔥🔥🔥
+    def execute_rename(self):
+        green_indices = []
+        other_count = 0
+        for i, item in enumerate(self.model.data_list):
+            if item['parse_result'].get('status_color') == COLOR_GREEN:
+                green_indices.append(i)
+            else:
+                other_count += 1
+
+        if not green_indices and other_count == 0:
+            QMessageBox.information(self, "Info", "List is empty.")
+            return
+
+        if other_count > 0:
+            reply = QMessageBox.warning(self, "Warning",
+                                        f"⚠️ {other_count} items are NOT Ready.\nOnly {len(green_indices)} Green items will be processed.\n\nContinue?",
+                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No: return
+
+        if not green_indices:
+            QMessageBox.information(self, "Info", "No Green (Ready) items to process.")
+            return
+
+        reg_out = self.settings['last_session'].get('regular_output_dir')
+        issue_out = self.settings['last_session'].get('issue_output_dir')
+        if not reg_out and not issue_out:
+            QMessageBox.warning(self, "Warning", "Please select output directories first!")
+            return
+
+        success_count = 0
+        errors = []
+        collision_policy = 0
+        indices_to_remove = []
+
+        for i in green_indices:
+            task = self.model.data_list[i]
+            src = task['original_path']
+            dst = task.get('target_full_path')
+            if not dst: continue
+
+            try:
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                if os.path.exists(dst):
+                    final_dst = dst
+                    action = collision_policy
+                    if collision_policy == 0:
+                        dialog = ConflictDialog(os.path.basename(src), dst, self)
+                        if dialog.exec():
+                            action = dialog.result_action
+                            if dialog.apply_to_all: collision_policy = action
+                        else:
+                            continue
+
+                    if action == 1:
+                        shutil.copy2(src, final_dst)
+                    elif action == 2:
+                        pass
+                    elif action == 3:
+                        base, ext = os.path.splitext(dst)
+                        counter = 1
+                        while os.path.exists(final_dst):
+                            final_dst = f"{base}_{counter}{ext}"
+                            counter += 1
+                        shutil.copy2(src, final_dst)
+                    if action != 2:
+                        success_count += 1
+                        indices_to_remove.append(i)
+                else:
+                    shutil.copy2(src, dst)
+                    success_count += 1
+                    indices_to_remove.append(i)
+            except Exception as e:
+                errors.append(f"{os.path.basename(src)}: {str(e)}")
+
+        if indices_to_remove:
+            self.model.remove_rows_by_indices(indices_to_remove)
+
+        msg = f"Successfully processed {success_count} files."
+        if self.model.rowCount() == 0:
+            msg += "\nAll tasks completed! List cleared."
+        elif other_count > 0:
+            msg += f"\n({other_count} items were skipped)"
+        if errors:
+            msg += f"\n\n{len(errors)} Errors occurred."
+            print("Errors:", errors)
+        QMessageBox.information(self, "Done", msg)
+
 
     def execute_rename(self):
         # 1. 预扫描：获取所有绿色行的索引

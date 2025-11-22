@@ -21,7 +21,7 @@ class PhotoTableModel(QAbstractTableModel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.headers = [
-            "序号", "原文件名", "Rel No", "原始CP/issue", "标准CP", "方向/issue",
+            "序号", "原文件名", "Rel No", "原始词", "标准节点 (CP)", "方向/问题描述",
             "置信度", "状态", "新文件名", "目标文件夹"
         ]
         self.data_list = []
@@ -39,9 +39,7 @@ class PhotoTableModel(QAbstractTableModel):
         return None
 
     def data(self, index, role):
-        if not index.isValid():
-            return None
-
+        if not index.isValid(): return None
         row = index.row()
         col = index.column()
         item = self.data_list[row]
@@ -51,21 +49,20 @@ class PhotoTableModel(QAbstractTableModel):
             if col == self.COL_NAME: return item['original_name']
             if col == self.COL_REL: return item['parse_result']['rel_no']
 
-            # 🔥🔥🔥 修改点：Issue 类型显示 "原始CP / 原始Issue" 🔥🔥🔥
             if col == self.COL_RAW_CP:
                 res = item['parse_result']
-                raw_cp = res.get('raw_cp', '')
-
-                if res.get('type') == 'Issue':
-                    raw_detail = res.get('raw_detail', '')
-                    # 只有当 raw_detail 有值时才拼接，避免显示多余的 "/"
-                    if raw_detail:
-                        return f"{raw_cp} / {raw_detail}" if raw_cp else raw_detail
-
-                return raw_cp
+                r_cp = res.get('raw_cp', '').strip()
+                r_det = res.get('raw_detail', '').strip()
+                display_str = ""
+                if r_cp and r_det:
+                    display_str = f"[{r_cp}@{r_det}]"
+                elif r_cp:
+                    display_str = f"[{r_cp}]"
+                elif r_det:
+                    display_str = f"[@{r_det}]"
+                return display_str
 
             if col == self.COL_STD_CP: return item['parse_result']['std_cp']
-            # 注意：COL_DETAIL 显示的是标准化的 Issue 或 Orient，不是原始词
             if col == self.COL_DETAIL: return item['parse_result']['detail']
 
             if col == self.COL_CONF:
@@ -87,28 +84,20 @@ class PhotoTableModel(QAbstractTableModel):
                 if full_path: return os.path.dirname(full_path)
                 return ""
 
+        # 编辑模式
         if role == Qt.EditRole:
-            if col == self.COL_STD_CP:
-                return item['parse_result']['std_cp']
-            if col == self.COL_DETAIL:
-                return item['parse_result']['detail']
+            if col == self.COL_NAME: return item['original_name']  # 🔥 允许编辑文件名
+            if col == self.COL_STD_CP: return item['parse_result']['std_cp']
+            if col == self.COL_DETAIL: return item['parse_result']['detail']
 
         if role == Qt.BackgroundRole:
             color_hex = item['parse_result'].get('status_color', '#FFFFFF')
             return QColor(color_hex)
 
-        # 🔥🔥🔥 修复点：解决悬停冲突 🔥🔥🔥
         if role == Qt.ToolTipRole:
-            # 1. 如果是【原文件名】列，返回 None (禁用系统 Tooltip)
-            # 因为这一列我们会有自定义的图片+路径弹窗
-            if col == self.COL_NAME:
-                return None
-
-            # 2. 其他路径类列：显示完整的绝对路径
+            if col == self.COL_NAME: return None
             if col == self.COL_NEW_NAME or col == self.COL_FOLDER:
                 return item.get('target_full_path', '')
-
-            # 3. 其他列：显示单元格内容
             return self.data(index, Qt.DisplayRole)
 
         if role == Qt.TextAlignmentRole:
@@ -124,24 +113,37 @@ class PhotoTableModel(QAbstractTableModel):
 
         if role == Qt.EditRole:
             old_val = ""
+            field_name = ""
+
             if col == self.COL_STD_CP:
                 old_val = self.data_list[row]['parse_result']['std_cp']
+                field_name = "标准节点"
             elif col == self.COL_DETAIL:
                 old_val = self.data_list[row]['parse_result']['detail']
+                field_name = "方向/问题"
+            elif col == self.COL_NAME:  # 🔥 原文件名处理
+                old_val = self.data_list[row]['original_name']
+                field_name = "原文件名 (重命名源文件)"
 
             if old_val == value: return False
+            if not value or not value.strip(): return False  # 不允许改为空
 
-            reply = QMessageBox.question(
-                None, "确认修改",
-                f"原值: 【{old_val}】\n\n新值: 【{value}】\n\n是否确认修改？",
-                QMessageBox.Yes | QMessageBox.No, QMessageBox.No
-            )
+            # 确认弹窗
+            msg = f"原值: 【{old_val}】\n新值: 【{value}】\n\n是否确认修改？"
+            if col == self.COL_NAME:
+                msg += "\n\n⚠️ 注意：这将直接修改硬盘上的源文件名！"
+
+            reply = QMessageBox.question(None, f"修改 {field_name}", msg, QMessageBox.Yes | QMessageBox.No,
+                                         QMessageBox.No)
             if reply == QMessageBox.No: return False
 
+            # 更新内存数据
             if col == self.COL_STD_CP:
                 self.data_list[row]['parse_result']['std_cp'] = value
             elif col == self.COL_DETAIL:
                 self.data_list[row]['parse_result']['detail'] = value
+            elif col == self.COL_NAME:
+                self.data_list[row]['original_name'] = value
 
             self.dataChanged.emit(index, index, [Qt.DisplayRole])
             return True
@@ -151,13 +153,28 @@ class PhotoTableModel(QAbstractTableModel):
         flags = super().flags(index)
         flags |= Qt.ItemIsEnabled | Qt.ItemIsSelectable
         col = index.column()
-        if col == self.COL_STD_CP or col == self.COL_DETAIL:
+        # 🔥 开放 COL_NAME 的编辑权限
+        if col in [self.COL_STD_CP, self.COL_DETAIL, self.COL_NAME]:
             flags |= Qt.ItemIsEditable
         return flags
 
-    # 🔥🔥🔥 修复点：新增查重方法 🔥🔥🔥
+    # 🔥🔥🔥 新增：更新源文件路径 (物理重命名成功后调用) 🔥🔥🔥
+    def update_source_path(self, row, new_full_path):
+        old_path = self.data_list[row]['original_path']
+
+        # 1. 更新查重集合
+        if os.path.normpath(old_path) in self.existing_paths:
+            self.existing_paths.remove(os.path.normpath(old_path))
+        self.existing_paths.add(os.path.normpath(new_full_path))
+
+        # 2. 更新数据
+        self.data_list[row]['original_path'] = new_full_path
+        self.data_list[row]['original_name'] = os.path.basename(new_full_path)
+
+        # 3. 刷新界面
+        # 这里不需要 emit dataChanged，因为在 MainWindow 里会调用 update_row 刷新整行
+
     def has_file(self, file_path):
-        # 使用标准化路径进行比较，防止 c:\A.jpg 和 c:/A.jpg 被当成两个
         return os.path.normpath(file_path) in self.existing_paths
 
     def add_rows(self, parser_results):
@@ -165,8 +182,7 @@ class PhotoTableModel(QAbstractTableModel):
         self.beginInsertRows(QModelIndex(), len(self.data_list), len(self.data_list) + len(parser_results) - 1)
         for res in parser_results:
             original_path = res['original']
-            self.existing_paths.add(os.path.normpath(original_path))  # 记录路径
-
+            self.existing_paths.add(os.path.normpath(original_path))
             self.data_list.append({
                 'original_path': original_path,
                 'original_name': os.path.basename(original_path),
@@ -180,7 +196,6 @@ class PhotoTableModel(QAbstractTableModel):
         if not self.data_list: return
         self.beginResetModel()
         self.data_list.clear()
-        # 🔥🔥🔥 必须添加这一行 🔥🔥🔥
         self.existing_paths.clear()
         self.endResetModel()
 
@@ -188,11 +203,9 @@ class PhotoTableModel(QAbstractTableModel):
         if not rows: return
         rows = sorted(list(set(rows)), reverse=True)
         for row in rows:
-            # 🔥🔥🔥 添加这两行逻辑 🔥🔥🔥
             path = self.data_list[row]['original_path']
             if os.path.normpath(path) in self.existing_paths:
                 self.existing_paths.remove(os.path.normpath(path))
-
             self.beginRemoveRows(QModelIndex(), row, row)
             del self.data_list[row]
             self.endRemoveRows()
