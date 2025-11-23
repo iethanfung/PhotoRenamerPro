@@ -5,3 +5,5 @@ rapidfuzz
 loguru
 Pillow
 pyinstaller
+backports.shutil_get_terminal_size
+backports.entry_points_selectable
