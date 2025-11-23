@@ -84,14 +84,14 @@ class MainWindow(QMainWindow):
         right_layout = QVBoxLayout(right_panel)
 
         top_btns = QHBoxLayout()
-        self.btn_settings = QPushButton("⚙️ Settings")
+        self.btn_settings = QPushButton("⚙️ 设置")
         self.btn_settings.clicked.connect(self.open_settings)
-        self.btn_clear = QPushButton("🗑️ Clear List")
+        self.btn_clear = QPushButton("🗑️ 清空列表")
         self.btn_clear.clicked.connect(self.clear_table)
         top_btns.addWidget(self.btn_settings)
         top_btns.addWidget(self.btn_clear)
 
-        self.btn_start = QPushButton("▶ Start Rename")
+        self.btn_start = QPushButton("▶ 开始重命名")
         self.btn_start.setObjectName("BigStartButton")
         self.btn_start.clicked.connect(self.execute_rename)
 
@@ -193,7 +193,7 @@ class MainWindow(QMainWindow):
             # 4. 刷新列表数据 (重新解析)
             self.refresh_list()
             
-            self.status_bar.update_status(self.model.rowCount(), 0, "Settings Reloaded & List Refreshed")
+            self.status_bar.update_status(self.model.rowCount(), 0, "设置已重载，列表已刷新")
 
     def refresh_list(self):
         """
@@ -223,7 +223,7 @@ class MainWindow(QMainWindow):
 
     def browse_excel(self):
         # 🔥 修改点：过滤器改为 *.csv
-        path, _ = QFileDialog.getOpenFileName(self, "Select Unit CSV", "", "CSV Files (*.csv);;All Files (*)")
+        path, _ = QFileDialog.getOpenFileName(self, "选择机台信息CSV文件", "", "CSV Files (*.csv);;All Files (*)")
         if path:
             self.load_excel(path)
             self.settings['last_session']['excel_path'] = path
@@ -235,27 +235,28 @@ class MainWindow(QMainWindow):
             # 🔥 修改点：显示文本改为 CSV
             self.btn_excel.setText(f"📄 CSV: {os.path.basename(path)}")
             self.btn_excel.setToolTip(path)
-            self.status_bar.update_status(0, 0, "CSV Loaded")
+            self.status_bar.update_status(0, 0, "CSV 已加载")
         else:
             QMessageBox.critical(self, "Error", msg)
 
     def browse_output(self, type_):
-        path = QFileDialog.getExistingDirectory(self, f"Select {type_} Output Directory")
+        title = "选择标准照输出文件夹" if type_ == 'regular' else "选择问题照输出文件夹"
+        path = QFileDialog.getExistingDirectory(self, title)
         if path:
             key = f"{type_}_output_dir"
             self.settings['last_session'][key] = path
             ConfigManager.save_settings(self.settings)
             # 实时更新按钮文字
             if type_ == 'regular':
-                self.btn_reg_dir.setText(f"📂 Reg Out: {os.path.basename(path)}")
+                self.btn_reg_dir.setText(f"📂 标准照输出路径: {os.path.basename(path)}")
                 self.btn_reg_dir.setToolTip(path)
             else:
-                self.btn_issue_dir.setText(f"📂 Issue Out: {os.path.basename(path)}")
+                self.btn_issue_dir.setText(f"📂 失效照输出路径: {os.path.basename(path)}")
                 self.btn_issue_dir.setToolTip(path)
 
     def clear_table(self):
         self.model.clear_all()
-        self.status_bar.update_status(0, 0, "List Cleared")
+        self.status_bar.update_status(0, 0, "列表已清空")
 
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
@@ -277,7 +278,7 @@ class MainWindow(QMainWindow):
 
     def process_files(self, file_paths):
         if not self.excel_engine.df is not None:
-            QMessageBox.warning(self, "Warning", "Please load Excel first!")
+            QMessageBox.warning(self, "Warning", "请先加载CSV文件！")
             return
 
         results = []
@@ -297,9 +298,9 @@ class MainWindow(QMainWindow):
 
         self.model.add_rows(results)
 
-        msg = f"Loaded {len(results)} files"
+        msg = f"已加载 {len(results)} 个文件"
         if skipped_count > 0:
-            msg += f" (Skipped {skipped_count} duplicates)"
+            msg += f" (跳过 {skipped_count} 个重复项)"
         self.status_bar.update_status(self.model.rowCount(), 0, msg)
 
     @Slot(object, object)
@@ -329,7 +330,7 @@ class MainWindow(QMainWindow):
                 new_res['target_full_path'] = target_path
                 self.model.update_row(row, new_res)
             except Exception as e:
-                QMessageBox.critical(self, "Rename Failed", str(e))
+                QMessageBox.critical(self, "Error", f"重命名失败: {str(e)}")
                 self.model.data_list[row]['original_name'] = os.path.basename(old_full_path)
                 self.model.dataChanged.emit(top_left, bottom_right)
             return
@@ -346,6 +347,7 @@ class MainWindow(QMainWindow):
             user_detail = item['parse_result']['detail']
 
             map_updated = False
+            learning_failed = False  # 🔥🔥🔥 新增：追踪学习是否失败 🔥🔥🔥
 
             # A. CP 学习
             if col == self.model.COL_STD_CP:
@@ -354,6 +356,7 @@ class MainWindow(QMainWindow):
                     if success:
                         map_updated = True
                     else:
+                        learning_failed = True  # 🔥 标记学习失败
                         QMessageBox.critical(self, "Error", msg)
 
             # B. Detail 学习
@@ -365,6 +368,7 @@ class MainWindow(QMainWindow):
                     if success:
                         map_updated = True
                     else:
+                        learning_failed = True  # 🔥 标记学习失败
                         QMessageBox.critical(self, "Error", msg)
                 elif user_detail != "[Unknown]" and user_detail != "[Unknown Issue]" and raw_detail:
                     if user_detail and user_detail.strip():
@@ -372,7 +376,23 @@ class MainWindow(QMainWindow):
                         if success:
                             map_updated = True
                         else:
+                            learning_failed = True  # 🔥 标记学习失败
                             QMessageBox.critical(self, "Error", msg)
+
+            # 🔥🔥🔥 新增：如果学习失败，需要回滚用户的修改 🔥🔥🔥
+            if learning_failed:
+                # 重新解析文件以恢复原值（因为setData已经修改了值）
+                new_res = self.parser_engine.parse_filename(item['original_path'])
+                
+                # 重新生成路径
+                target_path, target_name = self.file_processor.generate_target_path(new_res)
+                new_res['target_filename'] = target_name
+                new_res['target_full_path'] = target_path
+                
+                # 更新数据并刷新界面
+                item['parse_result'] = new_res
+                self.model.update_row(row, new_res)
+                return  # 🔥 提前返回，不执行后续逻辑
 
             # 🔥🔥🔥 核心修改：重算与回填 🔥🔥🔥
             if map_updated:
@@ -422,23 +442,23 @@ class MainWindow(QMainWindow):
                 other_count += 1
 
         if not green_indices and other_count == 0:
-            QMessageBox.information(self, "Info", "List is empty.")
+            QMessageBox.information(self, "Info", "列表为空。")
             return
 
         if other_count > 0:
             reply = QMessageBox.warning(self, "Warning",
-                                        f"⚠️ {other_count} items are NOT Ready.\nOnly {len(green_indices)} Green items will be processed.\n\nContinue?",
+                                        f"⚠️ {other_count} 项未就绪。\n仅 {len(green_indices)} 个绿色项将被处理。\n\n是否继续？",
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if reply == QMessageBox.No: return
 
         if not green_indices:
-            QMessageBox.information(self, "Info", "No Green (Ready) items to process.")
+            QMessageBox.information(self, "Info", "没有绿色（就绪）项可处理。")
             return
 
         reg_out = self.settings['last_session'].get('regular_output_dir')
         issue_out = self.settings['last_session'].get('issue_output_dir')
         if not reg_out and not issue_out:
-            QMessageBox.warning(self, "Warning", "Please select output directories first!")
+            QMessageBox.warning(self, "Warning", "请先选择输出目录！")
             return
 
         success_count = 0
@@ -489,130 +509,21 @@ class MainWindow(QMainWindow):
         if indices_to_remove:
             self.model.remove_rows_by_indices(indices_to_remove)
 
-        msg = f"Successfully processed {success_count} files."
+        msg = f"成功处理 {success_count} 个文件。"
         if self.model.rowCount() == 0:
-            msg += "\nAll tasks completed! List cleared."
+            msg += "\n所有任务已完成！列表已清空。"
         elif other_count > 0:
-            msg += f"\n({other_count} items were skipped)"
+            msg += f"\n({other_count} 项被跳过)"
         if errors:
-            msg += f"\n\n{len(errors)} Errors occurred."
+            msg += f"\n\n{len(errors)} 个错误发生。"
             print("Errors:", errors)
         QMessageBox.information(self, "Done", msg)
 
-
-    def execute_rename(self):
-        # 1. 预扫描：获取所有绿色行的索引
-        green_indices = []
-        other_count = 0
-
-        for i, item in enumerate(self.model.data_list):
-            if item['parse_result'].get('status_color') == COLOR_GREEN:
-                green_indices.append(i)
-            else:
-                other_count += 1
-
-        # 2. 检查逻辑
-        if not green_indices and other_count == 0:
-            QMessageBox.information(self, "Info", "List is empty.")
-            return
-
-        if other_count > 0:
-            reply = QMessageBox.warning(self, "Warning",
-                                        f"⚠️ {other_count} items are NOT Ready.\nOnly {len(green_indices)} Green items will be processed.\n\nContinue?",
-                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-            if reply == QMessageBox.No: return
-
-        if not green_indices:
-            QMessageBox.information(self, "Info", "No Green (Ready) items to process.")
-            return
-
-        reg_out = self.settings['last_session'].get('regular_output_dir')
-        issue_out = self.settings['last_session'].get('issue_output_dir')
-        if not reg_out and not issue_out:
-            QMessageBox.warning(self, "Warning", "Please select output directories first!")
-            return
-
-        # 3. 开始处理
-        success_count = 0
-        errors = []
-        collision_policy = 0
-
-        # 🔥🔥🔥 记录需要删除的行号 🔥🔥🔥
-        indices_to_remove = []
-
-        for i in green_indices:
-            task = self.model.data_list[i]
-            src = task['original_path']
-            dst = task.get('target_full_path')
-
-            if not dst: continue
-
-            try:
-                os.makedirs(os.path.dirname(dst), exist_ok=True)
-
-                # 冲突检测逻辑
-                target_exists = os.path.exists(dst)
-                should_copy = True
-                final_dst = dst
-
-                if target_exists:
-                    action = collision_policy
-                    if collision_policy == 0:
-                        dialog = ConflictDialog(os.path.basename(src), dst, self)
-                        if dialog.exec():
-                            action = dialog.result_action
-                            if dialog.apply_to_all:
-                                collision_policy = action
-                        else:
-                            should_copy = False  # Cancelled
-
-                    if action == 2:  # Skip
-                        should_copy = False
-                    elif action == 3:  # Keep Both
-                        base, ext = os.path.splitext(dst)
-                        counter = 1
-                        while os.path.exists(final_dst):
-                            final_dst = f"{base}_{counter}{ext}"
-                            counter += 1
-
-                # 执行复制
-                if should_copy:
-                    shutil.copy2(src, final_dst)
-                    success_count += 1
-                    # 🔥🔥🔥 复制成功，标记该行待删除 🔥🔥🔥
-                    indices_to_remove.append(i)
-
-            except Exception as e:
-                errors.append(f"{os.path.basename(src)}: {str(e)}")
-
-        # 4. 🔥🔥🔥 从表格中移除已处理的行 🔥🔥🔥
-        if indices_to_remove:
-            self.model.remove_rows_by_indices(indices_to_remove)
-
-        # 5. 结果提示
-        msg = f"Successfully processed {success_count} files."
-
-        # 如果全部处理完了，提示更简洁
-        if self.model.rowCount() == 0:
-            msg += "\nAll tasks completed! List cleared."
-        elif other_count > 0:
-            msg += f"\n({other_count} items were skipped/failed)"
-
-        if errors:
-            msg += f"\n\n{len(errors)} Errors occurred."
-            print("Errors:", errors)
-
-        QMessageBox.information(self, "Done", msg)
-
-
-# ... (上面是 MainWindow 类的所有代码) ...
-
-# 🔥🔥🔥 请把这段代码放到文件的最末尾 (不要有缩进) 🔥🔥🔥
 
 class ConflictDialog(QDialog):
     def __init__(self, filename, target_path, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("File Exists - Conflict Resolution")
+        self.setWindowTitle("文件已存在 - 冲突解决")
         self.resize(500, 220)
         self.result_action = 2  # 默认 Skip
         self.apply_to_all = False
@@ -621,16 +532,16 @@ class ConflictDialog(QDialog):
 
         # 提示信息
         info_label = QLabel(
-            f"<h3>Target file already exists</h3>"
-            f"<p><b>File:</b> {filename}</p>"
-            f"<p style='color:#666'><b>Target:</b> {target_path}</p>"
-            f"<p>What do you want to do?</p>"
+            f"<h3>目标文件已存在</h3>"
+            f"<p><b>文件:</b> {filename}</p>"
+            f"<p style='color:#666'><b>目标:</b> {target_path}</p>"
+            f"<p>您希望怎么做？</p>"
         )
         info_label.setWordWrap(True)
         layout.addWidget(info_label)
 
         # "应用到所有" 复选框
-        self.chk_all = QCheckBox("Do this for all remaining conflicts")
+        self.chk_all = QCheckBox("对剩余冲突应用此操作")
         layout.addWidget(self.chk_all)
 
         layout.addSpacing(10)
@@ -638,9 +549,9 @@ class ConflictDialog(QDialog):
         # 按钮组
         btn_layout = QHBoxLayout()
 
-        btn_overwrite = QPushButton("Overwrite (覆盖)")
-        btn_skip = QPushButton("Skip (跳过)")
-        btn_keep = QPushButton("Keep Both (自动重命名)")
+        btn_overwrite = QPushButton("覆盖")
+        btn_skip = QPushButton("跳过")
+        btn_keep = QPushButton("保留两者 (自动重命名)")
 
         # 设置默认建议
         btn_keep.setDefault(True)

@@ -1,8 +1,8 @@
 {
   "last_session": {
     "excel_path": "C:/Users/admin/Desktop/重构/机台信息表.csv",
-    "regular_output_dir": "C:/Users/admin/Desktop/重构/put",
-    "issue_output_dir": "C:/Users/admin/Desktop/重构/put"
+    "regular_output_dir": "C:/Users/admin/Desktop/重构/put/标准照",
+    "issue_output_dir": "C:/Users/admin/Desktop/重构/put/失效照"
   },
   "excel_header_map": {
     "Test": "Test",
