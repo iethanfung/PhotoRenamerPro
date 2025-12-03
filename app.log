@@ -17040,3 +17040,10 @@
 2025-11-23 12:20:15.131 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: rel9997_-_10cm-location2_o-1
 2025-11-23 12:20:24.634 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: 0001_-_45min_-_02
 2025-11-23 12:20:44.173 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 21:10:40.526 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 21:43:30.920 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 21:56:55.854 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 22:10:02.861 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 22:25:53.491 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 22:42:48.240 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-03 22:49:49.425 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
