@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QHBoxLayout, QPushButton, QFrame, QTabWidget
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QEvent
 
 
 class TemplatesPage(QWidget):
@@ -55,16 +55,22 @@ class TemplatesPage(QWidget):
         data = self.settings.get(config_key, {})
         store = self.widgets['issue_template'] if is_issue else self.widgets['reg_template']
 
-        layout.addWidget(QLabel("<b>文件名模板:</b>"))
         edit_name = QLineEdit(data.get('template_name', ''))
+        edit_folder = QLineEdit(data.get('template_folder', ''))
+        
+        # 默认焦点在 name 输入框
+        store['current_edit'] = edit_name
+
+        layout.addWidget(QLabel("<b>文件名模板:</b>"))
         edit_name.setObjectName("InputBox")
         store['name'] = edit_name
+        edit_name.installEventFilter(self)
         layout.addWidget(edit_name)
 
         layout.addWidget(QLabel("<b>文件夹路径模板:</b>"))
-        edit_folder = QLineEdit(data.get('template_folder', ''))
         edit_folder.setObjectName("InputBox")
         store['folder'] = edit_folder
+        edit_folder.installEventFilter(self)
         layout.addWidget(edit_folder)
 
         edit_name.textChanged.connect(lambda: self.update_preview(is_issue))
@@ -99,8 +105,23 @@ class TemplatesPage(QWidget):
         # 初始时调用一次预览
         self.update_preview(is_issue)
 
+    def eventFilter(self, source, event):
+        if event.type() == QEvent.Type.FocusIn:
+            # 检查是哪个 tab 的输入框
+            if source in [self.widgets['reg_template'].get('name'), self.widgets['reg_template'].get('folder')]:
+                self.widgets['reg_template']['current_edit'] = source
+            elif source in [self.widgets['issue_template'].get('name'), self.widgets['issue_template'].get('folder')]:
+                self.widgets['issue_template']['current_edit'] = source
+        return super().eventFilter(source, event)
+
+    def insert_tag(self, store, tag):
+        edit = store.get('current_edit')
+        if edit:
+            edit.insert(tag)
+            edit.setFocus()
+
     def refresh_chips(self, mapping_keys, parsed_vars, sys_id_map):
-        """由主对话框调用，传入最新的  Keys 和 Parsed Vars"""
+        """由主对话框调用,传入最新的  Keys 和 Parsed Vars"""
         # 🔥 3. 更新暂存的映射关系
         self.current_sys_id_map = sys_id_map
         self.current_parsed_vars = parsed_vars
@@ -128,7 +149,6 @@ class TemplatesPage(QWidget):
             orient_tag = parsed_vars.get('O', 'Orient')
             tags += [cp_tag, orient_tag]
 
-        edit_target = store['name']
         for tag in tags:
             clean_tag = tag.replace("{", "").replace("}", "")
             label = f"{{{clean_tag}}}"
@@ -136,7 +156,7 @@ class TemplatesPage(QWidget):
             btn = QPushButton(label)
             btn.setObjectName("TagChip")
             btn.setCursor(Qt.PointingHandCursor)
-            btn.clicked.connect(lambda _, t=label, e=edit_target: e.insert(t))
+            btn.clicked.connect(lambda _, t=label, s=store: self.insert_tag(s, t))
             layout.addWidget(btn)
 
     def update_preview(self, is_issue):

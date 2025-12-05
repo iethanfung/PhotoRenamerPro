@@ -179,8 +179,9 @@ class PhotoTableModel(QAbstractTableModel):
 
     def add_rows(self, parser_results):
         if not parser_results: return
-        self.beginInsertRows(QModelIndex(), len(self.data_list), len(self.data_list) + len(parser_results) - 1)
-        for res in parser_results:
+        sorted_results = self._sort_photos(parser_results)
+        self.beginInsertRows(QModelIndex(), len(self.data_list), len(self.data_list) + len(sorted_results) - 1)
+        for res in sorted_results:
             original_path = res['original']
             self.existing_paths.add(os.path.normpath(original_path))
             self.data_list.append({
@@ -191,6 +192,80 @@ class PhotoTableModel(QAbstractTableModel):
                 'target_full_path': res.get('target_full_path', '')
             })
         self.endInsertRows()
+        if len(sorted_results) > 0:
+            self.resort_all()
+
+    def _sort_photos(self, parser_results):
+        """按照Rel No→CP→方向→Issue的顺序排序"""
+        def sort_key(res):
+            # 1. Rel No（版本号）- 优先排序
+            rel_no = res.get('rel_no', '')
+            rel_no_num = self._extract_number(rel_no)
+            
+            # 2. 节点（CP）- Unknown直接排到最后
+            std_cp = res.get('std_cp', '')
+            if std_cp == '[Unknown CP]' or not std_cp:
+                cp_num = float('inf')
+                cp_str = std_cp or '[Unknown CP]'
+            else:
+                cp_num = self._extract_number(std_cp)
+                cp_str = std_cp
+            
+            # 3. 照片类型：方向照=0，问题照=1
+            is_issue = res.get('is_issue', False)
+            photo_type = 1 if is_issue else 0
+            
+            # 4. 方向/问题细节 - Unknown直接排到最后
+            detail = res.get('detail', '')
+            if detail in ['[Unknown]', '[Unknown Issue]', ''] or not detail:
+                detail_num = float('inf')
+                detail_str = detail or '[Unknown]'
+            else:
+                detail_num = self._extract_number(detail)
+                detail_str = detail
+            
+            return (rel_no_num, cp_num, photo_type, detail_num, detail_str)
+        
+        return sorted(parser_results, key=sort_key)
+
+    def _extract_number(self, text):
+        """从文本中提取数字，用于排序"""
+        import re
+        if not text:
+            return float('inf')  # 空值排到最后
+        # 检查是否是Unknown类型
+        if '[Unknown' in str(text) or text in ['[Unknown]', '[Unknown Issue]', '[Unknown CP]']:
+            return float('inf')  # Unknown排到最后
+        match = re.search(r'(\d+)', str(text))
+        return int(match.group(1)) if match else float('inf')
+
+    def resort_all(self):
+        """重新排序所有照片"""
+        if not self.data_list:
+            return
+        
+        # 提取parse_result
+        parser_results = [item['parse_result'] for item in self.data_list]
+        
+        # 排序
+        sorted_results = self._sort_photos(parser_results)
+        
+        # 重新构建 data_list
+        new_data_list = []
+        for res in sorted_results:
+            original_path = res['original']
+            new_data_list.append({
+                'original_path': original_path,
+                'original_name': os.path.basename(original_path),
+                'parse_result': res,
+                'target_filename': res.get('target_filename', ''),
+                'target_full_path': res.get('target_full_path', '')
+            })
+        
+        # 更换数据
+        self.beginResetModel()
+        self.data_list = new_data_list
+        self.endResetModel()
 
     def clear_all(self):
         if not self.data_list: return

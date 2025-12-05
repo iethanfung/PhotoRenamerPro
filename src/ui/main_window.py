@@ -331,8 +331,11 @@ class MainWindow(QMainWindow):
                 self.model.update_row(row, new_res)
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"重命名失败: {str(e)}")
+                # 使用 blockSignals 防止无限循环
+                self.model.blockSignals(True)
                 self.model.data_list[row]['original_name'] = os.path.basename(old_full_path)
                 self.model.dataChanged.emit(top_left, bottom_right)
+                self.model.blockSignals(False)
             return
 
         # 2. 自学习与重算逻辑
@@ -431,6 +434,9 @@ class MainWindow(QMainWindow):
             item['parse_result']['target_full_path'] = target_path
 
             self.model.update_row(row, item['parse_result'])
+            
+            # 🔥🔥🔥 新增：修改数据后重新排序 🔥🔥🔥
+            self.model.resort_all()
 
     def execute_rename(self):
         green_indices = []
