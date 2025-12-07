@@ -26,6 +26,59 @@ class OrderedTreeWidget(QTreeWidget):
         self.setAnimated(True)  # Enable animations for smoother feel
         self.setIndentation(20) # Ensure indentation is visible
 
+    def keyPressEvent(self, event):
+        """
+        Override keyPressEvent to support expand/collapse with arrow keys.
+        Supports both single and multiple selection.
+        Right arrow: expand selected items that have children
+        Left arrow: collapse selected items (or move to parent if single item and no children/collapsed)
+        """
+        selected_items = self.selectedItems()
+        
+        if selected_items:
+            if event.key() == Qt.Key_Right:
+                # Right arrow: expand all selected items that have children
+                expanded_any = False
+                for item in selected_items:
+                    if item.childCount() > 0 and not item.isExpanded():
+                        item.setExpanded(True)
+                        expanded_any = True
+                
+                if expanded_any:
+                    event.accept()
+                    return
+                    
+            elif event.key() == Qt.Key_Left:
+                # Left arrow: collapse all selected items that are expanded
+                # Special case: if only one item selected and it's collapsed/has no children, move to parent
+                if len(selected_items) == 1:
+                    item = selected_items[0]
+                    if item.childCount() > 0 and item.isExpanded():
+                        item.setExpanded(False)
+                        event.accept()
+                        return
+                    else:
+                        # If already collapsed or no children, move to parent
+                        parent = item.parent()
+                        if parent:
+                            self.setCurrentItem(parent)
+                            event.accept()
+                            return
+                else:
+                    # Multiple items selected: collapse all that are expanded
+                    collapsed_any = False
+                    for item in selected_items:
+                        if item.childCount() > 0 and item.isExpanded():
+                            item.setExpanded(False)
+                            collapsed_any = True
+                    
+                    if collapsed_any:
+                        event.accept()
+                        return
+        
+        # For all other cases, use default behavior
+        super().keyPressEvent(event)
+
     def dragMoveEvent(self, event):
         """
         Override dragMoveEvent to control the drop indicator and validity.
@@ -234,7 +287,9 @@ class VisualJsonEditor(QWidget):
                         leaf.setText(0, alias)
                         leaf.setData(0, Qt.UserRole, "alias")
         
-        self.tree.expandAll()
+        # Don't expand all by default - let user expand what they need
+        # self.tree.expandAll()
+        self.tree.collapseAll()
         
         # Restore search filter
         current_search = self.search_input.text().strip()

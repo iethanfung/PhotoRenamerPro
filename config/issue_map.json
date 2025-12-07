@@ -1,275 +1,315 @@
 {
-  "Duomo assembly gap": [
-    "Duomo assembly gap",
-    "笔尾组件间隙",
-    "笔尾组装间隙",
-    "笔尾间隙",
-    "Duomo gap",
-    "Duomo asm gap",
-    "尾部组装间隙"
+  "Tip crack": [
+    "tip crack",
+    "笔尖裂纹",
+    "笔尖裂缝",
+    "尖端裂纹"
   ],
-  "Duomo chipping": [
-    "Duomo chipping",
-    "笔尾掉片",
-    "Duomo chip",
-    "笔尾崩边",
-    "Duomo CPG",
-    "笔尾缺口"
-  ],
-  "Duomo crack": [
-    "Duomo crack",
-    "笔尾裂纹",
-    "Duomo CRK",
-    "尾部裂开",
-    "笔尾破裂"
-  ],
-  "Duomo dent": [
-    "Duomo dent",
-    "笔尾凹痕",
-    "笔尾凹坑",
-    "Duomo DENT",
-    "笔尾撞痕",
-    "尾部凹陷"
-  ],
-  "Duomo discoloration": [
-    "Duomo discoloration",
-    "笔尾变色",
-    "笔尾异色",
-    "Duomo discolor",
-    "Duomo color change",
-    "笔尾褪色",
-    "尾部色差"
-  ],
-  "Duomo displacement": [
-    "Duomo displacement",
-    "笔尾位移",
-    "笔尾移位",
-    "Duomo shift",
-    "尾部偏位",
-    "笔尾位置偏差"
-  ],
-  "Duomo housing crack": [
-    "Duomo housing crack",
-    "笔尾笔身裂纹",
-    "笔尾笔身侧裂纹",
-    "Duomo hsg crack",
-    "Duomo body crack",
-    "尾部笔管裂纹"
-  ],
-  "Duomo housing chipping": [
-    "Duomo housing chipping",
-    "笔尾笔身掉片",
-    "笔尾笔身侧掉片",
-    "Duomo hsg chipping",
-    "Duomo body chip",
-    "尾部笔管掉漆"
-  ],
-  "Duomo sink": [
-    "Duomo sink",
-    "笔尾下陷",
-    "笔尾下沉",
-    "Duomo sinking",
-    "尾部塌陷",
-    "笔尾高低差"
-  ],
-  "Duomo tilt": [
-    "Duomo tilt",
-    "笔尾倾斜",
-    "Duomo tilted",
-    "笔尾歪斜",
-    "尾部倾角"
-  ],
-  "Duomo wear": [
-    "Duomo wear",
-    "笔尾磨损",
-    "Duomo worn",
-    "笔尾擦伤",
-    "尾部摩擦"
-  ],
-  "Fedora chipping": [
-    "Fedora chipping",
-    "笔帽掉片",
-    "Fedora chip",
-    "笔帽崩边",
-    "Cap chipping",
-    "帽身缺口"
-  ],
-  "Fedora coating wear": [
-    "Fedora coating wear",
-    "笔帽涂层磨损",
-    "Fedora coating worn",
-    "笔帽漆面磨损",
-    "Cap coating wear"
-  ],
-  "Fedora coating wear through": [
-    "Fedora coating wear through",
-    "笔帽涂层磨穿",
-    "Fedora wear through",
-    "Cap coating wear through",
-    "笔帽露底"
-  ],
-  "Fedora crack": [
-    "Fedora crack",
-    "笔帽裂纹",
-    "Fedora CRK",
-    "笔帽破裂",
-    "Cap crack"
-  ],
-  "Fedora crazing": [
-    "Fedora crazing",
-    "笔帽细小裂纹",
-    "Fedora micro-crack",
-    "笔帽细纹",
-    "Cap crazing"
-  ],
-  "Fedora dent": [
-    "Fedora dent",
-    "笔帽凹痕",
-    "笔帽凹坑",
-    "Cap dent",
-    "Fedora DENT",
-    "笔帽压痕"
-  ],
-  "Fedora discoloration": [
-    "Fedora discoloration",
-    "笔帽变色",
-    "Cap discoloration",
-    "笔帽褪色",
-    "Fedora color change"
-  ],
-  "Fedora internal chipping": [
-    "Fedora internal chipping",
-    "笔帽内部掉片",
-    "Fedora inner chip",
-    "笔帽内侧崩边"
-  ],
-  "Fedora internal crack": [
-    "Fedora internal crack",
-    "笔帽内部裂纹",
-    "Fedora inner crack",
-    "笔帽内侧裂开"
-  ],
-  "Fedora internal dent": [
-    "Fedora internal dent",
-    "笔帽内部凹痕",
-    "Fedora inner dent",
-    "笔帽内侧压痕"
-  ],
-  "Fedora internal discoloration": [
-    "Fedora internal discoloration",
-    "笔帽内部变色",
-    "Fedora inner discolor",
-    "笔帽内侧色差"
-  ],
-  "Fedora parting line": [
-    "Fedora parting line",
-    "笔帽合模线",
-    "笔帽模印线",
-    "Fedora mold line",
-    "Cap parting line",
-    "笔帽分型线"
-  ],
-  "Fedora wear": [
-    "Fedora wear",
-    "笔帽磨损",
-    "Fedora worn",
-    "Cap wear",
-    "笔帽擦伤"
-  ],
-  "Housing crack": [
-    "Housing crack",
-    "笔身裂纹",
-    "Hsg crack",
-    "Body crack",
-    "笔管裂开"
-  ],
-  "Housing chipping": [
-    "Housing chipping",
-    "笔身掉片",
-    "Hsg chipping",
-    "Body chip",
-    "笔管崩边"
-  ],
-  "Housing abrasion": [
-    "Housing abrasion",
-    "笔身磨损",
-    "Hsg abrasion",
-    "Body abrasion",
-    "笔身擦伤",
-    "笔管摩擦"
-  ],
-  "Housing dent": [
-    "Housing dent",
-    "笔身凹痕",
-    "Hsg dent",
-    "Body dent",
-    "笔管凹坑"
-  ],
-  "Housing discoloration": [
-    "Housing discoloration",
-    "笔身变色",
-    "Hsg discoloration",
-    "Body discolor",
-    "笔身色差"
-  ],
-  "Magic wand displacement": [
-    "Magic wand displacement",
-    "笔芯移位",
-    "笔芯位移",
-    "Magic wand shift",
-    "笔芯偏位",
-    "Refill displacement"
-  ],
-  "Magic wand discoloration": [
-    "Magic wand discoloration",
-    "笔芯异色",
-    "笔芯变色",
-    "Magic wand discolor",
-    "Refill discoloration",
-    "笔芯色差"
-  ],
-  "Magnetic particle embedment": [
-    "Magnetic particle embedment",
-    "磁颗粒嵌入",
-    "笔身磁颗粒嵌入",
-    "笔帽磁颗粒嵌入",
-    "Magnetic particle",
-    "磁粉嵌入",
-    "吸附磁颗粒"
-  ],
-  "Tip dent": [
-    "Tip dent",
-    "笔尖凹痕",
-    "Tip DENT",
-    "笔尖凹坑",
-    "尖端凹陷"
-  ],
-  "Tip discoloration": [
-    "Tip discoloration",
-    "笔尖异色",
-    "Tip discolor",
-    "笔尖变色",
-    "尖端色差"
-  ],
-  "Tip tilt": [
-    "Tip tilt",
-    "笔尖倾斜",
-    "Tip tilted",
-    "笔尖歪斜",
-    "尖端倾斜"
+  "Tip fracture": [
+    "tip fracture",
+    "笔尖断裂",
+    "笔尖破裂",
+    "尖端断裂"
   ],
   "Tip wear": [
-    "Tip wear",
+    "tip wear",
     "笔尖磨损",
-    "Tip worn",
-    "尖端磨损",
-    "笔尖擦伤"
+    "笔尖擦伤",
+    "尖端磨耗"
   ],
-  "Tip wear through": [
-    "Tip wear through",
-    "笔尖磨穿",
-    "Tip wear-through",
-    "尖端磨穿",
-    "笔尖露底"
+  "Tip pop-off": [
+    "tip pop-off",
+    "笔尖脱落",
+    "笔尖脱出",
+    "尖端脱落"
+  ],
+  "Tip gap increase": [
+    "tip gap increase",
+    "笔尖间隙增大",
+    "笔尖空隙变大",
+    "尖端间隙异常"
+  ],
+  "Tip magnet exposure": [
+    "tip magnet exposure",
+    "笔尖磁铁外露",
+    "笔尖磁体暴露",
+    "磁铁裸露"
+  ],
+  "Tip dent": [
+    "tip dent",
+    "笔尖凹痕",
+    "笔尖凹陷",
+    "尖端凹坑"
+  ],
+  "Magic Wand Displacement": [
+    "magic wand displacement",
+    "笔芯偏移",
+    "笔芯移位",
+    "笔尖移位"
+  ],
+  "Magic Wand Fracture": [
+    "magic wand fracture",
+    "笔芯断裂",
+    "笔芯破裂"
+  ],
+  "Magic Wand Bent": [
+    "magic wand bent",
+    "笔芯弯曲",
+    "笔芯变形"
+  ],
+  "Magic Wand Bent deg": [
+    "magic wand bent deg",
+    "笔芯弯折",
+    "笔芯倾斜",
+    "笔芯弯曲"
+  ],
+  "Magic Wand coating damage": [
+    "magic wand coating damage",
+    "笔芯涂层损伤",
+    "芯体涂层破损",
+    "笔芯涂层掉色"
+  ],
+  "Magic Wand tip/round electrode damage": [
+    "magic wand tip/round electrode damage",
+    "笔芯端部损伤",
+    "圆电极损伤",
+    "端部破损"
+  ],
+  "Tip discoloration": [
+    "tip discoloration",
+    "笔尖变色",
+    "笔尖异色",
+    "尖端色差"
+  ],
+  "Nose cone foam extrusion": [
+    "nose cone foam extrusion",
+    "前端泡棉挤出",
+    "鼻锥泡棉外露"
+  ],
+  "Cap wear": [
+    "cap wear",
+    "笔帽磨损",
+    "笔帽擦伤",
+    "笔帽磨耗"
+  ],
+  "Cap crack": [
+    "cap crack",
+    "笔帽裂纹",
+    "笔帽裂缝"
+  ],
+  "Cap fracture": [
+    "cap fracture",
+    "笔帽断裂",
+    "帽身破裂"
+  ],
+  "Cap pop-off": [
+    "cap pop-off",
+    "笔帽脱落",
+    "笔帽脱出",
+    "帽身脱落"
+  ],
+  "Cap pop-out": [
+    "cap pop-out",
+    "笔帽弹出",
+    "笔帽松脱"
+  ],
+  "Cap Assembly Gap": [
+    "cap assembly gap",
+    "笔帽装配间隙",
+    "帽身间隙"
+  ],
+  "Cap discoloration": [
+    "cap discoloration",
+    "笔帽变色",
+    "笔帽异色",
+    "帽身色差"
+  ],
+  "Cap tilt": [
+    "cap tilt",
+    "笔帽倾斜",
+    "帽身歪斜"
+  ],
+  "Cap loose": [
+    "cap loose",
+    "笔帽松动",
+    "帽身不紧"
+  ],
+  "Boulder mark on cap": [
+    "boulder mark on cap",
+    "笔帽印痕",
+    "笔帽印子"
+  ],
+  "Tip Housing crack Zone1": [
+    "tip housing crack zone1",
+    "笔尖侧笔身裂纹 Z1",
+    "笔尖笔身裂纹 Z1",
+    "笔身裂纹 Z1"
+  ],
+  "Tip Housing crack Zone2": [
+    "tip housing crack zone2",
+    "笔尖侧笔身裂纹 Z2",
+    "笔尖笔身裂纹 Z2",
+    "笔身裂纹 Z2"
+  ],
+  "Tip Housing crack Zone3": [
+    "tip housing crack zone3",
+    "笔尖侧笔身裂纹 Z3",
+    "笔尖笔身裂纹 Z3",
+    "笔身裂纹 Z3"
+  ],
+  "Tip Housing crack Zone4": [
+    "tip housing crack zone4",
+    "笔尖侧笔身裂纹 Z4",
+    "笔尖笔身裂纹 Z4",
+    "笔身裂纹 Z4"
+  ],
+  "Tip Housing crack Zone5": [
+    "tip housing crack zone5",
+    "笔尖侧笔身裂纹 Z5",
+    "笔尖笔身裂纹 Z5",
+    "笔身裂纹 Z5"
+  ],
+  "Tip Housing crack Zone6": [
+    "tip housing crack zone6",
+    "笔尖侧笔身裂纹 Z6",
+    "笔尖笔身裂纹 Z6",
+    "笔身裂纹 Z6"
+  ],
+  "Tip Housing crack Zone7": [
+    "tip housing crack zone7",
+    "笔尖侧笔身裂纹 Z7",
+    "笔尖笔身裂纹 Z7",
+    "笔身裂纹 Z7"
+  ],
+  "Tip Housing crack Zone8": [
+    "tip housing crack zone8",
+    "笔尖侧笔身裂纹 Z8",
+    "笔尖笔身裂纹 Z8",
+    "笔身裂纹 Z8"
+  ],
+  "Tip Housing Chip": [
+    "tip housing chip",
+    "笔尖侧掉片",
+    "笔尖侧崩边"
+  ],
+  "Cap Housing crack Zone1": [
+    "cap housing crack zone1",
+    "笔帽侧笔身裂纹 Z1",
+    "笔帽笔身裂纹 Z1",
+    "帽身裂纹 Z1"
+  ],
+  "Cap Housing crack Zone2": [
+    "cap housing crack zone2",
+    "笔帽侧笔身裂纹 Z2",
+    "笔帽笔身裂纹 Z2",
+    "帽身裂纹 Z2"
+  ],
+  "Cap Housing crack Zone3": [
+    "cap housing crack zone3",
+    "笔帽侧笔身裂纹 Z3",
+    "笔帽笔身裂纹 Z3",
+    "帽身裂纹 Z3"
+  ],
+  "Cap Housing crack Zone4": [
+    "cap housing crack zone4",
+    "笔帽侧笔身裂纹 Z4",
+    "笔帽笔身裂纹 Z4",
+    "帽身裂纹 Z4"
+  ],
+  "Cap Housing crack Zone5": [
+    "cap housing crack zone5",
+    "笔帽侧笔身裂纹 Z5",
+    "笔帽笔身裂纹 Z5",
+    "帽身裂纹 Z5"
+  ],
+  "Cap Housing crack Zone6": [
+    "cap housing crack zone6",
+    "笔帽侧笔身裂纹 Z6",
+    "笔帽笔身裂纹 Z6",
+    "帽身裂纹 Z6"
+  ],
+  "Cap Housing crack Zone7": [
+    "cap housing crack zone7",
+    "笔帽侧笔身裂纹 Z7",
+    "笔帽笔身裂纹 Z7",
+    "帽身裂纹 Z7"
+  ],
+  "Cap Housing crack Zone8": [
+    "cap housing crack zone8",
+    "笔帽侧笔身裂纹 Z8",
+    "笔帽笔身裂纹 Z8",
+    "帽身裂纹 Z8"
+  ],
+  "Cap Housing Chip": [
+    "cap housing chip",
+    "笔帽侧掉片",
+    "笔帽侧笔身掉片"
+  ],
+  "Cap Housing discoloration": [
+    "cap housing discoloration",
+    "笔帽侧变色",
+    "笔帽侧异色",
+    "笔帽侧笔身异色"
+  ],
+  "Housing crack": [
+    "housing crack",
+    "笔身裂纹",
+    "笔身裂缝"
+  ],
+  "Housing fracture": [
+    "housing fracture",
+    "笔身断裂"
+  ],
+  "Housing abrasion": [
+    "housing abrasion",
+    "笔身磨损",
+    "笔身擦伤"
+  ],
+  "Magnetic particle embedment": [
+    "magnetic particle embedment",
+    "磁颗粒嵌入",
+    "磁粉嵌入"
+  ],
+  "Housing discoloration": [
+    "housing discoloration",
+    "笔身变色",
+    "笔身异色"
+  ],
+  "Housing coating degradation": [
+    "housing coating degradation",
+    "笔身涂层老化",
+    "机身涂层退化"
+  ],
+  "Laser etch degradation": [
+    "laser etch degradation",
+    "激光蚀刻老化",
+    "激光标记退化"
+  ],
+  "Housing denting": [
+    "housing denting",
+    "笔身凹痕",
+    "笔身凹坑",
+    "笔身磕伤"
+  ],
+  "Housing bent": [
+    "housing bent",
+    "笔身弯曲",
+    "机身弯折"
+  ],
+  "Coating Wear Through": [
+    "coating wear through",
+    "涂层磨穿",
+    "涂层穿透"
+  ],
+  "Visual dust ingress": [
+    "visual dust ingress",
+    "可视粉尘进入",
+    "异物进入"
+  ],
+  "Glue overflow": [
+    "glue overflow",
+    "溢胶",
+    "胶水外溢",
+    "笔帽溢胶"
   ]
 }
