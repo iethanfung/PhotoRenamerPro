@@ -25,7 +25,18 @@ class ExcelEngine:
             self.df.columns = self.df.columns.str.strip()
 
             # 3. 获取 Rel No 列名
-            rel_col_name = header_map.get("Rel_No", "No#").strip()
+             #这里定义可能的rel no的表头写法
+            possible_keys = ["Rel No.", "Rel No", "Rel#", "Rel", "No#"]
+            rel_col_name = None
+            for key in possible_keys:
+                if key in header_map:
+                    rel_col_name = header_map[key].strip()
+                    break
+
+            if rel_col_name is None:
+                # 如果都没有找到，使用默认值
+                rel_col_name = "No#"
+
 
             # 4. 验证列是否存在
             if rel_col_name not in self.df.columns:
