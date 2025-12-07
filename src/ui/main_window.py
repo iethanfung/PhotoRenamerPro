@@ -492,7 +492,7 @@ class MainWindow(QMainWindow):
                             continue
 
                     if action == 1:
-                        shutil.copy2(src, final_dst)
+                        shutil.move(src, final_dst)
                     elif action == 2:
                         pass
                     elif action == 3:
@@ -501,12 +501,12 @@ class MainWindow(QMainWindow):
                         while os.path.exists(final_dst):
                             final_dst = f"{base}_{counter}{ext}"
                             counter += 1
-                        shutil.copy2(src, final_dst)
+                        shutil.move(src, final_dst)
                     if action != 2:
                         success_count += 1
                         indices_to_remove.append(i)
                 else:
-                    shutil.copy2(src, dst)
+                    shutil.move(src, dst)
                     success_count += 1
                     indices_to_remove.append(i)
             except Exception as e:

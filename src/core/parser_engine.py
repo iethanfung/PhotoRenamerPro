@@ -45,14 +45,14 @@ class ParserEngine:
 
         logger.info(f"🔵 [V4.3 严格匹配] 文件: {base_name}")
 
-        # 1. 提取 Rel No
-        all_nums = re.findall(r'\d+', base_name)
-        all_nums.sort(key=len, reverse=True)
-
+        # 1. 提取 Rel No - 优化策略：优先匹配开头的数字
         found_rel_token = None
         candidates_rows = []
-
-        for num_str in all_nums:
+        
+        # 策略1: 优先尝试文件名开头的数字（Rel No通常在开头）
+        head_match = re.match(r'^(\d+)', base_name)
+        if head_match:
+            num_str = head_match.group(1)
             info = self.excel.get_unit_info(num_str)
             if info:
                 candidates_rows = info if isinstance(info, list) else [info]
@@ -64,7 +64,25 @@ class ParserEngine:
                 if not val or val == 'UNKNOWN': val = num_str
                 result['rel_no'] = val
                 found_rel_token = num_str
-                break
+        
+        # 策略2: 如果开头数字没匹配成功，按长度降序尝试其他数字
+        if not found_rel_token:
+            all_nums = re.findall(r'\d+', base_name)
+            all_nums.sort(key=len, reverse=True)
+            
+            for num_str in all_nums:
+                info = self.excel.get_unit_info(num_str)
+                if info:
+                    candidates_rows = info if isinstance(info, list) else [info]
+                    first_row = candidates_rows[0]
+                    val = first_row.get('Rel_No')
+                    if not val or val == 'UNKNOWN':
+                        user_col = self.settings['excel_header_map'].get('Rel_No', 'No#').strip()
+                        val = first_row.get(user_col)
+                    if not val or val == 'UNKNOWN': val = num_str
+                    result['rel_no'] = val
+                    found_rel_token = num_str
+                    break
 
         if not result['rel_no']:
             result['status_msg'] = "Rel No Not Found"
@@ -128,19 +146,20 @@ class ParserEngine:
                     result['detail'] = "[Unknown Issue]"
                     result['status_msg'] = "Unknown Issue"
 
-        # 3. 构建残差
-        residual = base_name
-        if found_rel_token:
-            residual = residual.replace(found_rel_token, " ", 1)
-        if result['raw_detail']:
-            residual = residual.replace(result['raw_detail'], " ", 1)
-
-        # 动态移除所有支持的图片扩展名
-        for char in ['_', '-', '—', '——', '(', ')', '[', ']'] + list(SUPPORTED_IMAGE_FORMATS) + ['+']:
-            residual = residual.replace(char, ' ')
-
-        residual = residual.strip()
-        result['raw_cp'] = residual
+        # 3. 构建残差 - 使用tokens方式避免字符串替换的误伤
+        # 从 tokens 中排除已识别的 rel_no 和 detail
+        remaining_tokens = []
+        for token in tokens:
+            # 跳过 Rel No token
+            if token == found_rel_token:
+                continue
+            # 跳过 detail token (如果存在)
+            if result['raw_detail'] and token == result['raw_detail']:
+                continue
+            remaining_tokens.append(token)
+        
+        # 将剩余 tokens 组合为 raw_cp
+        result['raw_cp'] = ' '.join(remaining_tokens)
 
         # 4. 搜寻 CP
         excel_test_strings = set()
@@ -150,7 +169,7 @@ class ParserEngine:
 
         best_match = {"std_cp": None, "raw_score": 0.0, "final_conf": 0.0}
 
-        if residual:
+        if result['raw_cp']:
             strict_scope = set()
             for test_str in excel_test_strings:
                 if test_str in self.cp_map:
@@ -162,11 +181,11 @@ class ParserEngine:
                             strict_scope.add(p)
 
             if strict_scope:
-                best_match = self._search_best_cp(residual, list(strict_scope), is_context_match=True)
+                best_match = self._search_best_cp(result['raw_cp'], list(strict_scope), is_context_match=True)
             else:
                 # 只有 CSV Test 未知时才允许全网搜
                 all_tests = list(self.cp_map.keys())
-                best_match = self._search_best_cp(residual, all_tests, is_context_match=False)
+                best_match = self._search_best_cp(result['raw_cp'], all_tests, is_context_match=False)
 
         # 5. 结果结算
         result['unit_data'] = candidates_rows[0].copy()
