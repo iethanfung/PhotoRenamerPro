@@ -15,6 +15,7 @@ from src.core.parser_engine import ParserEngine
 from src.core.file_processor import FileProcessor
 from src.core.learner import Learner
 from src.utils.constants import COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_RED, SUPPORTED_IMAGE_FORMATS
+from src.utils.operation_logger import get_operation_logger
 
 
 class MainWindow(QMainWindow):
@@ -468,9 +469,16 @@ class MainWindow(QMainWindow):
             return
 
         success_count = 0
+        skip_count = 0
+        error_count = 0
         errors = []
         collision_policy = 0
         indices_to_remove = []
+
+        # 🔥🔥🔥 创建新的操作日志文件 🔥🔥🔥
+        op_logger = get_operation_logger()
+        log_file_path = op_logger.create_new_log_file()
+        print(f"操作日志文件已创建: {log_file_path}")
 
         for i in green_indices:
             task = self.model.data_list[i]
@@ -489,40 +497,74 @@ class MainWindow(QMainWindow):
                             action = dialog.result_action
                             if dialog.apply_to_all: collision_policy = action
                         else:
+                            # 用户取消了对话框
+                            op_logger.log_operation_skip(src, dst, "用户取消操作")
+                            skip_count += 1
                             continue
 
-                    if action == 1:
+                    if action == 1:  # 覆盖
                         shutil.move(src, final_dst)
-                    elif action == 2:
-                        pass
-                    elif action == 3:
+                        op_logger.log_rename_success(src, final_dst, task['parse_result'])
+                        success_count += 1
+                        indices_to_remove.append(i)
+                    elif action == 2:  # 跳过
+                        op_logger.log_operation_skip(src, dst, "目标文件已存在，用户选择跳过")
+                        skip_count += 1
+                    elif action == 3:  # 保留两者
                         base, ext = os.path.splitext(dst)
                         counter = 1
                         while os.path.exists(final_dst):
                             final_dst = f"{base}_{counter}{ext}"
                             counter += 1
                         shutil.move(src, final_dst)
-                    if action != 2:
+                        op_logger.log_rename_success(src, final_dst, task['parse_result'])
                         success_count += 1
                         indices_to_remove.append(i)
                 else:
                     shutil.move(src, dst)
+                    op_logger.log_rename_success(src, dst, task['parse_result'])
                     success_count += 1
                     indices_to_remove.append(i)
             except Exception as e:
-                errors.append(f"{os.path.basename(src)}: {str(e)}")
+                error_msg = str(e)
+                errors.append(f"{os.path.basename(src)}: {error_msg}")
+                op_logger.log_operation_error(src, error_msg)
+                error_count += 1
+
+
+        # 🔥🔥🔥 记录未就绪的项目 🔥🔥🔥
+        if other_count > 0:
+            for i, item in enumerate(self.model.data_list):
+                if item['parse_result'].get('status_color') != COLOR_GREEN:
+                    src = item['original_path']
+                    status_msg = item['parse_result'].get('status_msg', 'Unknown')
+                    # 提取失败原因
+                    reason = "解析不完整或置信度较低"
+                    if "Unknown" in status_msg:
+                        reason = f"未能识别关键信息: {status_msg}"
+                    op_logger.log_parse_failure(src, reason, status_msg)
+
+        # 🔥🔥🔥 写入操作汇总 🔥🔥🔥
+        total_processed = len(green_indices)
+        unready_count = other_count
+        op_logger.write_summary(total_processed + unready_count, success_count, skip_count, error_count, unready_count)
+        op_logger.close()
+        print(f"操作日志已保存: {log_file_path}")
 
         if indices_to_remove:
             self.model.remove_rows_by_indices(indices_to_remove)
 
         msg = f"成功处理 {success_count} 个文件。"
+        if skip_count > 0:
+            msg += f"\n⚠️ 跳过 {skip_count} 个文件。"
         if self.model.rowCount() == 0:
             msg += "\n所有任务已完成！列表已清空。"
         elif other_count > 0:
-            msg += f"\n({other_count} 项被跳过)"
+            msg += f"\n({other_count} 项未就绪)"
         if errors:
             msg += f"\n\n{len(errors)} 个错误发生。"
             print("Errors:", errors)
+        msg += f"\n\n📝 操作日志已保存至:\n{os.path.basename(log_file_path)}"
         QMessageBox.information(self, "Done", msg)
 
 
