@@ -3,7 +3,7 @@ import re
 import math
 from rapidfuzz import process, fuzz
 from loguru import logger
-from src.utils.constants import COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_RED
+from src.utils.constants import COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_RED, SUPPORTED_IMAGE_FORMATS
 
 
 class ParserEngine:
@@ -135,7 +135,8 @@ class ParserEngine:
         if result['raw_detail']:
             residual = residual.replace(result['raw_detail'], " ", 1)
 
-        for char in ['_', '-', '—', '——', '(', ')', '[', ']', '.jpg', '.png', '.jpeg', '+']:
+        # 动态移除所有支持的图片扩展名
+        for char in ['_', '-', '—', '——', '(', ')', '[', ']'] + list(SUPPORTED_IMAGE_FORMATS) + ['+']:
             residual = residual.replace(char, ' ')
 
         residual = residual.strip()

@@ -194,7 +194,7 @@ class TemplatesPage(QWidget):
             name_tmpl = name_tmpl.replace(f"{{{k}}}", v)
             folder_tmpl = folder_tmpl.replace(f"{{{k}}}", v)
 
-        store['lbl_name'].setText("📄 " + name_tmpl + ".jpg")
+        store['lbl_name'].setText("📄 " + name_tmpl + ".<扩展名>")
         store['lbl_folder'].setText("📂 " + folder_tmpl)
 
     def save_data(self):

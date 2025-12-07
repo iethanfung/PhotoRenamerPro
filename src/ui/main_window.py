@@ -14,7 +14,7 @@ from src.core.excel_engine import ExcelEngine
 from src.core.parser_engine import ParserEngine
 from src.core.file_processor import FileProcessor
 from src.core.learner import Learner
-from src.utils.constants import COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_RED
+from src.utils.constants import COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_RED, SUPPORTED_IMAGE_FORMATS
 
 
 class MainWindow(QMainWindow):
@@ -270,9 +270,9 @@ class MainWindow(QMainWindow):
             if os.path.isdir(path):
                 for root, dirs, fnames in os.walk(path):
                     for f in fnames:
-                        if f.lower().endswith(('.jpg', '.png', '.jpeg')):
+                        if f.lower().endswith(SUPPORTED_IMAGE_FORMATS):
                             files.append(os.path.join(root, f))
-            elif path.lower().endswith(('.jpg', '.png', '.jpeg')):
+            elif path.lower().endswith(SUPPORTED_IMAGE_FORMATS):
                 files.append(path)
         self.process_files(files)
 

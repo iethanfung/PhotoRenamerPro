@@ -219,3 +219,6 @@
 2025-12-05 20:34:59.342 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: P1_R4_rel4614_Q0IT5HBWWS_Post_WF54_Tip tap writer + Pressure Squeeze - 20mm_T0-O22
 2025-12-05 20:34:59.344 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: P1_R5_rel6115_EZRGU95UII_Post_WF54_Tip tap writer + Pressure Squeeze - 20mm_400000-O10
 2025-12-05 20:34:59.345 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: P1_R6_5123_F2W66INB4X_Stow_WF87_Tip tap writer + Tip tap artist_1000000-O8
+2025-12-07 18:38:38.144 | INFO     | src.core.excel_engine:load_excel:82 - ✅ CSV 加载完毕。有效行数: 1710。索引库大小: 2319
+2025-12-07 18:38:58.050 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: 0001_-_6000c_~_orient17
+2025-12-07 18:39:53.780 | INFO     | src.core.parser_engine:parse_filename:46 - 🔵 [V4.3 严格匹配] 文件: 0001_-_45min_-_02

@@ -6,6 +6,24 @@ COLOR_YELLOW = "#FFFDE7" # 浅黄背景
 COLOR_ORANGE = "#FFF3E0" # 浅橙背景
 COLOR_RED = "#FFEBEE"    # 浅红背景
 
+# 支持的图片格式（元组形式，用于 endswith 检查）
+SUPPORTED_IMAGE_FORMATS = (
+    # JPEG 系列
+    '.jpg', '.jpeg', '.jpe', '.jfif',
+    # PNG
+    '.png',
+    # BMP
+    '.bmp', '.dib',
+    # GIF
+    '.gif',
+    # TIFF
+    '.tif', '.tiff',
+    # WEBP
+    '.webp',
+    # 其他常见格式
+    '.ico',
+)
+
 # 路径常量
 APP_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CONFIG_DIR = os.path.join(APP_ROOT, 'config')
